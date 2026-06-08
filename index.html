@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>화송이 스튜디오</title>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;700;900&family=Bebas+Neue&family=Oswald:wght@300;400;700&family=Raleway:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Lora:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;700;900&family=Josefin+Sans:ital,wght@0,100;0,300;0,400;0,700;1,300&family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,400&family=Abril+Fatface&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Sacramento&family=Pacifico&family=Satisfy&family=Yesteryear&family=Kings&family=Manufacturing+Consent&family=Mrs+Sheppards&family=Gowun+Dodum&family=Song+Myung&family=Bagel+Fat+One&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f0ede8;--panel:#faf8f5;--panel2:#f0ede8;--border:#ddd8d0;--accent:#b07d3a;--accent2:#d94f4f;--text:#2a2118;--text-dim:#8a7e70;--shadow:rgba(80,60,30,.15)}
 html{height:100%}*{margin:0;padding:0;box-sizing:border-box}
@@ -252,7 +252,7 @@ select.prop-input{cursor:pointer}
         <span class="sample-toggle" id="sampleToggle">▾</span>
       </div>
       <div class="sample-grid" id="sampleGrid">
-        <div class="sample-card sc-vogue" onclick="loadSample('classic')"><div class="sc-inner" style="background:#fff"><div><div class="sc-mag-title" style="color:#111;font-size:13px;letter-spacing:-0.5px">VOGUE</div><div class="sc-sub" style="color:#cc2222;letter-spacing:.1em">KOREA MAN</div></div><div class="sc-bottom"><div class="sc-feature" style="color:#111;font-size:3.5px">COVER NAME<br><span style="color:#cc2222">LONGEST CHARTING</span></div></div></div><div class="sc-label" style="background:linear-gradient(to top,rgba(0,0,0,.7),transparent)">샘플 레이아웃<span>화이트·블랙</span></div><div class="sample-loading">적용하기</div></div>
+        <div class="sample-card sc-vogue" onclick="loadSample('classic')"><div class="sc-inner" style="background:#fff"><div><div class="sc-mag-title" style="color:#111;font-size:13px;letter-spacing:-0.5px">SAMPLE</div><div class="sc-sub" style="color:#cc2222;letter-spacing:.1em">LAYOUT</div></div><div class="sc-bottom"><div class="sc-bar" style="background:#111;width:100%;height:1px;margin-bottom:2px"></div><div class="sc-feature" style="color:#111;font-size:3.5px">COVER NAME<br><span style="color:#cc2222">RISING STAR</span></div></div></div><div class="sc-label" style="background:linear-gradient(to top,rgba(0,0,0,.7),transparent)">샘플 레이아웃<span>화이트·블랙</span></div><div class="sample-loading">적용하기</div></div>
         <div class="sample-card sc-noir" onclick="loadSample('noir')"><div class="sc-inner"><div><div class="sc-mag-title" style="color:#fff;letter-spacing:.08em">NOIR</div><div class="sc-sub" style="color:#fff;opacity:.4">EDITORIAL</div></div><div class="sc-bottom"><div style="width:100%;height:1px;background:rgba(255,255,255,.12);margin-bottom:3px"></div><div class="sc-feature" style="color:#fff">DARK FANTASY</div></div></div><div class="sc-label">다크 에디토리얼<span>흑백 미니멀</span></div><div class="sample-loading">적용하기</div></div>
         <div class="sample-card sc-nature" onclick="loadSample('nature')"><div class="sc-inner"><div><div class="sc-mag-title" style="color:#7ecb8a;letter-spacing:.1em">FLORA</div><div class="sc-sub" style="color:#7ecb8a;opacity:.8">LIVING</div></div><div class="sc-bottom"><div class="sc-feature" style="color:#7ecb8a">KNOW-HOW</div></div></div><div class="sc-label">네이처 그린<span>자연·봄</span></div><div class="sample-loading">적용하기</div></div>
         <div class="sample-card sc-modern" onclick="loadSample('modern')"><div class="sc-inner"><div><div class="sc-mag-title" style="color:#c9a96e;font-size:13px">M</div><div class="sc-sub" style="color:rgba(255,255,255,.3)">MAGAZINE</div></div><div class="sc-bottom"><div class="sc-feature" style="color:#c9a96e">ON COVER</div></div></div><div class="sc-label">모던 미니멀<span>블랙·골드</span></div><div class="sample-loading">적용하기</div></div>
@@ -330,11 +330,57 @@ select.prop-input{cursor:pointer}
     </div>
     <div class="modal-content" id="tab-text">
       <div class="prop-row"><span class="prop-label">내용</span><textarea class="text-input-area" id="textContent" placeholder="텍스트 입력">MAGAZINE</textarea></div>
-      <div class="prop-row"><span class="prop-label">폰트</span><select class="prop-input" id="textFont"><option value="'Playfair Display', serif">Playfair Display</option><option value="'Cormorant Garamond', serif">Cormorant Garamond</option><option value="'Montserrat', sans-serif">Montserrat</option><option value="'Nanum Myeongjo', serif">나눔명조</option><option value="Georgia, serif">Georgia</option><option value="Arial, sans-serif">Arial</option></select></div>
+      <div class="prop-row"><span class="prop-label">폰트</span><select class="prop-input" id="textFont"><optgroup label="── 세리프 (고급·잡지)">
+<option value="'Playfair Display', serif">Playfair Display</option>
+<option value="'Cormorant Garamond', serif">Cormorant Garamond</option>
+<option value="'EB Garamond', serif">EB Garamond</option>
+<option value="'Libre Baskerville', serif">Libre Baskerville</option>
+<option value="'Lora', serif">Lora</option>
+<option value="'DM Serif Display', serif">DM Serif Display</option>
+<option value="'Bodoni Moda', serif">Bodoni Moda</option>
+<option value="'Cinzel', serif">Cinzel</option>
+<option value="Georgia, serif">Georgia</option>
+</optgroup>
+<optgroup label="── 산세리프 (모던·미니멀)">
+<option value="'Montserrat', sans-serif">Montserrat</option>
+<option value="'Raleway', sans-serif">Raleway</option>
+<option value="'Josefin Sans', sans-serif">Josefin Sans</option>
+<option value="'Oswald', sans-serif">Oswald</option>
+<option value="Arial, sans-serif">Arial</option>
+</optgroup>
+<optgroup label="── 디스플레이 (임팩트)">
+<option value="'Bebas Neue', cursive">Bebas Neue</option>
+<option value="'Abril Fatface', cursive">Abril Fatface</option>
+<option value="'Pacifico', cursive">Pacifico</option>
+</optgroup>
+<optgroup label="── 캘리그래피 (손글씨)">
+<option value="'Dancing Script', cursive">Dancing Script</option>
+<option value="'Great Vibes', cursive">Great Vibes</option>
+<option value="'Sacramento', cursive">Sacramento</option>
+<option value="'Satisfy', cursive">Satisfy</option>
+<option value="'Yesteryear', cursive">Yesteryear</option>
+<option value="'Kings', cursive">Kings</option>
+<option value="'Manufacturing Consent', cursive">Manufacturing Consent</option>
+<option value="'Mrs Sheppards', cursive">Mrs Sheppards</option>
+</optgroup>
+<optgroup label="── 한국어">
+<option value="'Nanum Myeongjo', serif">나눔명조 (한글)</option>
+<option value="'Noto Serif KR', serif">Noto Serif KR (한글)</option>
+<option value="'Gowun Dodum', sans-serif">고운돋움 (한글)</option>
+<option value="'Song Myung', serif">송명 (한글)</option>
+<option value="'Bagel Fat One', cursive">배글팻원 (한글)</option>
+</optgroup></select></div>
       <div class="prop-row"><span class="prop-label">크기</span><input type="number" class="prop-input" id="textSize" value="48" min="6" max="300"></div>
       <div class="prop-row"><span class="prop-label">색상</span><input type="color" class="prop-input" id="textColor" value="#ffffff"></div>
       <div class="prop-row"><span class="prop-label">굵기</span><select class="prop-input" id="textWeight"><option value="300">Light</option><option value="400">Regular</option><option value="700" selected>Bold</option><option value="900">Black</option></select></div>
       <div class="prop-row"><span class="prop-label">스타일</span><select class="prop-input" id="textStyle"><option value="normal">Normal</option><option value="italic">Italic</option></select></div>
+      <div class="prop-row"><span class="prop-label">방향</span>
+        <select class="prop-input" id="textDir">
+          <option value="horizontal">가로 →</option>
+          <option value="vertical-rl">세로 ↓ (오른쪽→왼쪽)</option>
+          <option value="vertical-lr">세로 ↑ (왼쪽→오른쪽)</option>
+        </select>
+      </div>
     </div>
     <div class="modal-content" id="tab-shape">
       <div class="prop-row"><span class="prop-label">모양</span><select class="prop-input" id="shapeType" onchange="onShapeTypeChange()"><option value="rect">사각형</option><option value="circle">원형</option><option value="line">직선</option><option value="curve-wave">물결 곡선</option><option value="curve-arc">아치 곡선</option><option value="curve-s">S자 곡선</option><option value="curve-diagonal">대각선 곡선</option></select></div>
@@ -534,7 +580,7 @@ function addLayer(){
   if(activeTab==='image'){showToast('이미지를 선택해주세요');return;}
   if(activeTab==='sticker'){showToast('스티커를 클릭해서 추가하세요');return;}
   if(activeTab==='clip'){addClipLayer();return;}
-  if(activeTab==='text'){addTextLayer(document.getElementById('textContent').value||'TEXT',document.getElementById('textFont').value,parseInt(document.getElementById('textSize').value)||48,document.getElementById('textColor').value,document.getElementById('textWeight').value,document.getElementById('textStyle').value);closeModal('newLayerModal');}
+  if(activeTab==='text'){const _dir=document.getElementById('textDir')?.value||'horizontal';addTextLayer(document.getElementById('textContent').value||'TEXT',document.getElementById('textFont').value,parseInt(document.getElementById('textSize').value)||48,document.getElementById('textColor').value,document.getElementById('textWeight').value,document.getElementById('textStyle').value,_dir);closeModal('newLayerModal');}
   if(activeTab==='shape'){const t=document.getElementById('shapeType').value,c=document.getElementById('shapeColor').value,op=document.getElementById('shapeOpacity').value/100,w=parseInt(document.getElementById('shapeW').value)||200,h=parseInt(document.getElementById('shapeH').value)||200,sw=parseInt(document.getElementById('shapeStroke').value)||2,cv=parseInt(document.getElementById('shapeCurve').value)||50,bw=parseInt(document.getElementById('shapeBorder').value)||0,bc=document.getElementById('shapeBorderColor').value;addShapeLayer(t,c,op,w,h,sw,cv,bw,bc);closeModal('newLayerModal');}
 }
 function mkTextDefaults(){return{textShadow:false,shadowColor:'rgba(0,0,0,.5)',shadowBlur:4,shadowX:2,shadowY:2,textStroke:false,strokeColor:'#000',strokeWidth:1};}
@@ -549,9 +595,10 @@ function addImageLayer(src,name){
     renderLayers();selectLayer(id);updateEmptyHint();showToast('이미지 레이어 추가됨');
   };img.src=src;
 }
-function addTextLayer(text,font,size,color,weight,style){
+function addTextLayer(text,font,size,color,weight,style,dir){
   const id='layer_'+(++layerCounter);
-  pushHistory();layers.push({id,type:'text',name:text.substring(0,18),text,font,size,color,weight:weight||'700',style:style||'normal',x:30,y:30,opacity:1,visible:true,locked:false,letterSpacing:0,...mkTextDefaults()});
+  const _vert=dir&&dir!=='horizontal'; const _vdir=dir==='vertical-lr'?'lr':'rl';
+  pushHistory();layers.push({id,type:'text',name:text.substring(0,18),text,font,size,color,weight:weight||'700',style:style||'normal',x:30,y:30,opacity:1,visible:true,locked:false,letterSpacing:0,vertical:_vert,verticalDir:_vert?_vdir:'',textAlign:'left',...mkTextDefaults()});
   renderLayers();selectLayer(id);updateEmptyHint();showToast('텍스트 레이어 추가됨');
 }
 function addShapeLayer(type,color,opacity,w,h,stroke,curve,border,borderColor){
@@ -596,8 +643,22 @@ function createLayerElement(layer){
     el.classList.add('text-layer');
     el.style.fontFamily=layer.font;el.style.fontSize=layer.size+'px';
     el.style.fontWeight=layer.weight||'700';el.style.fontStyle=layer.style||'normal';
-    el.style.letterSpacing=(layer.letterSpacing||0)+'px';el.style.lineHeight='1.15';el.style.whiteSpace='pre-wrap';
-    // 그라디언트 텍스트 지원
+    el.style.letterSpacing=(layer.letterSpacing||0)+'px';el.style.lineHeight='1.15';
+    el.style.textAlign=layer.textAlign||'left';
+    // 세로 쓰기
+    if(layer.vertical){
+      el.style.writingMode='vertical-rl';
+      el.style.textOrientation='mixed';
+      if(layer.verticalDir==='lr') el.style.transform='rotate(180deg)';
+      else el.style.transform='';
+      el.style.whiteSpace='pre';
+    } else {
+      el.style.writingMode='';
+      el.style.textOrientation='';
+      el.style.transform='';
+      el.style.whiteSpace='pre-wrap';
+    }
+    // 그라디언트 텍스트
     if(layer.color&&layer.color.includes('gradient')){
       el.style.backgroundImage=layer.color;
       el.style.webkitBackgroundClip='text';
@@ -649,31 +710,55 @@ function createLayerElement(layer){
     const clipId='clip_'+layer.id;
     const svgNS='http://www.w3.org/2000/svg';
     const svg=document.createElementNS(svgNS,'svg');
-    svg.setAttribute('width',layer.width); svg.setAttribute('height',layer.height);
+    const W=layer.width, H=layer.height;
+    svg.setAttribute('width',W); svg.setAttribute('height',H);
+    svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
     svg.style.cssText='position:absolute;inset:0;width:100%;height:100%;overflow:hidden';
     // clipPath 정의
     const defs=document.createElementNS(svgNS,'defs');
     const cp=document.createElementNS(svgNS,'clipPath');
     cp.id=clipId;
-    const W=layer.width, H=layer.height;
     const maskEl=buildClipPathEl(layer.clipShape||'circle', W, H, svgNS);
     cp.appendChild(maskEl);
     defs.appendChild(cp);
     svg.appendChild(defs);
-    // 이미지
+    // 이미지 — 오프셋/스케일 적용
+    const sc=layer.imgScale||1;
+    const scaledW=W*sc, scaledH=H*sc;
+    const ox=layer.imgOffsetX||0, oy=layer.imgOffsetY||0;
+    // 중앙 기준 오프셋
+    const ix=(W-scaledW)/2 + ox;
+    const iy=(H-scaledH)/2 + oy;
     const img=document.createElementNS(svgNS,'image');
     img.setAttribute('href',layer.src);
-    img.setAttribute('x','0'); img.setAttribute('y','0');
-    img.setAttribute('width',W); img.setAttribute('height',H);
+    img.setAttribute('x', ix);
+    img.setAttribute('y', iy);
+    img.setAttribute('width', scaledW);
+    img.setAttribute('height', scaledH);
     img.setAttribute('preserveAspectRatio','xMidYMid slice');
     img.setAttribute('clip-path',`url(#${clipId})`);
+    img.id='clipimg_'+layer.id;
     svg.appendChild(img);
     el.appendChild(svg);
+
+    // ── 이미지 드래그 (선택된 레이어에서 Shift+드래그)
+    if(layer.id===selectedId){
+      const dragHint=document.createElement('div');
+      dragHint.style.cssText='position:absolute;bottom:4px;left:50%;transform:translateX(-50%);background:rgba(176,125,58,.85);color:#fff;font-size:8px;padding:2px 7px;border-radius:8px;white-space:nowrap;pointer-events:none;font-family:Montserrat,sans-serif';
+      dragHint.textContent='Shift+드래그: 이미지 이동';
+      el.appendChild(dragHint);
+    }
   }
 
   el.addEventListener('mousedown',e=>{
     if(e.target.classList.contains('resize-handle'))return;
     if(layer.locked){showToast('🔒 잠금된 레이어입니다');return;}
+    // clip 레이어: Shift+드래그 → 이미지 내부 이동
+    if(layer.type==='clip'&&e.shiftKey){
+      selectLayer(layer.id);
+      startClipImgDrag(e,layer.id);
+      return;
+    }
     selectLayer(layer.id);
     startDrag(e,layer.id);
   });
@@ -771,9 +856,49 @@ function showLayerProps(id){
     outline.setAttribute('fill','none');outline.setAttribute('stroke','#b07d3a');outline.setAttribute('stroke-width','1.5');outline.setAttribute('stroke-dasharray','4 2');
     previewSvg.appendChild(outline);
 
+    const ox=layer.imgOffsetX||0, oy=layer.imgOffsetY||0, sc=layer.imgScale||1;
+
     cont.innerHTML=`
       <div class="prop-section-title">⬡ 클리핑 마스크</div>
-      <div style="display:flex;justify-content:center;margin:8px 0;background:var(--panel2);border-radius:8px;padding:10px;border:1px solid var(--border)" id="clip_preview_${id}"></div>
+
+      <!-- 드래그 가능한 미리보기 -->
+      <div style="display:flex;flex-direction:column;align-items:center;margin:6px 0 10px;gap:6px">
+        <div id="clip_preview_${id}"
+          style="position:relative;width:120px;height:120px;background:var(--panel2);border-radius:8px;border:1px solid var(--border);overflow:hidden;cursor:grab;flex-shrink:0"
+          title="드래그해서 이미지 위치 조절"></div>
+        <span style="font-size:9px;color:var(--text-dim)">↔ 드래그해서 이미지 위치 조절</span>
+      </div>
+
+      <!-- 이미지 위치 조절 -->
+      <div style="margin-bottom:6px;padding:8px;background:var(--panel2);border-radius:6px;border:1px solid var(--border)">
+        <div style="font-size:9px;font-weight:700;color:var(--text-dim);letter-spacing:.1em;margin-bottom:6px">📐 이미지 위치 조절</div>
+        <div class="prop-row" style="margin-bottom:5px">
+          <span class="prop-label" style="font-size:10px">좌우</span>
+          <div style="flex:1;display:flex;gap:5px;align-items:center">
+            <input type="range" class="prop-input" style="flex:1" min="-300" max="300" value="${ox}"
+              oninput="updateClipImg('${id}','imgOffsetX',+this.value);document.getElementById('clip_ox_${id}').textContent=this.value">
+            <span id="clip_ox_${id}" style="font-size:9px;color:var(--text-dim);width:28px;text-align:right">${ox}</span>
+          </div>
+        </div>
+        <div class="prop-row" style="margin-bottom:5px">
+          <span class="prop-label" style="font-size:10px">상하</span>
+          <div style="flex:1;display:flex;gap:5px;align-items:center">
+            <input type="range" class="prop-input" style="flex:1" min="-300" max="300" value="${oy}"
+              oninput="updateClipImg('${id}','imgOffsetY',+this.value);document.getElementById('clip_oy_${id}').textContent=this.value">
+            <span id="clip_oy_${id}" style="font-size:9px;color:var(--text-dim);width:28px;text-align:right">${oy}</span>
+          </div>
+        </div>
+        <div class="prop-row" style="margin-bottom:5px">
+          <span class="prop-label" style="font-size:10px">크기</span>
+          <div style="flex:1;display:flex;gap:5px;align-items:center">
+            <input type="range" class="prop-input" style="flex:1" min="50" max="300" value="${Math.round(sc*100)}"
+              oninput="updateClipImg('${id}','imgScale',this.value/100);document.getElementById('clip_sc_${id}').textContent=this.value+'%'">
+            <span id="clip_sc_${id}" style="font-size:9px;color:var(--text-dim);width:32px;text-align:right">${Math.round(sc*100)}%</span>
+          </div>
+        </div>
+        <button class="btn btn-ghost" style="width:100%;font-size:10px;margin-top:2px" onclick="resetClipImg('${id}')">↺ 초기화</button>
+      </div>
+
       <div class="prop-row"><span class="prop-label">이름</span><input class="prop-input" value="${layer.name}" onchange="updateLayerProp('${id}','name',this.value)"></div>
       <div class="prop-row"><span class="prop-label">모양</span>
         <select class="prop-input" onchange="updateLayerProp('${id}','clipShape',this.value)">
@@ -785,7 +910,7 @@ function showLayerProps(id){
       <div class="prop-row"><span class="prop-label">너비</span><input type="number" class="prop-input" value="${Math.round(layer.width)}" onchange="resizeProp('${id}','width',+this.value)"></div>
       <div class="prop-row"><span class="prop-label">높이</span><input type="number" class="prop-input" value="${Math.round(layer.height)}" onchange="resizeProp('${id}','height',+this.value)"></div>
       <div class="prop-row"><span class="prop-label">투명도</span><input type="range" class="prop-input" min="0" max="1" step=".01" value="${layer.opacity}" oninput="updateLayerPropLive('${id}','opacity',+this.value)"></div>
-      <div style="margin-top:10px;display:flex;gap:4px">
+      <div style="margin-top:8px;display:flex;gap:4px">
         <button class="btn btn-ghost" style="flex:1;font-size:10px" onclick="moveLayerUp('${id}')">↑ 위로</button>
         <button class="btn btn-ghost" style="flex:1;font-size:10px" onclick="duplicateLayer('${id}')">⧉ 복제</button>
         <button class="btn btn-ghost" style="flex:1;font-size:10px" onclick="moveLayerDown('${id}')">↓ 아래로</button>
@@ -794,7 +919,11 @@ function showLayerProps(id){
     `;
     // 미리보기 SVG 삽입
     const previewBox=document.getElementById('clip_preview_'+id);
-    if(previewBox) previewBox.appendChild(previewSvg);
+    if(previewBox){
+      previewBox.appendChild(previewSvg);
+      // 미리보기 드래그로 이미지 위치 조절
+      initClipPreviewDrag(previewBox, id, 120, 120);
+    }
     return;
   }
 
@@ -818,12 +947,56 @@ function showLayerProps(id){
     <span class="prop-label" style="width:auto;margin-bottom:2px">내용 <span style="font-size:9px;color:var(--text-dim);font-weight:400">— 오른쪽 패널에서 직접 수정하세요</span></span>
     <textarea class="text-input-area" style="font-size:11px;min-height:70px" oninput="liveTextEdit('${id}',this.value)" onchange="updateLayerProp('${id}','text',this.value)">${layer.text}</textarea>
     </div>
-    <div class="prop-row"><span class="prop-label">폰트</span><select class="prop-input" onchange="updateLayerProp('${id}','font',this.value)">${[["'Playfair Display', serif","Playfair Display"],["'Cormorant Garamond', serif","Cormorant"],["'Montserrat', sans-serif","Montserrat"],["'Nanum Myeongjo', serif","나눔명조"],["Georgia, serif","Georgia"],["Arial, sans-serif","Arial"]].map(([v,n])=>`<option value="${v}" ${layer.font===v?'selected':''}>${n}</option>`).join('')}</select></div>
+    <div class="prop-row"><span class="prop-label">폰트</span><select class="prop-input" onchange="updateLayerProp('${id}','font',this.value)">${[
+  ["'Playfair Display', serif","Playfair Display"],
+  ["'Cormorant Garamond', serif","Cormorant Garamond"],
+  ["'EB Garamond', serif","EB Garamond"],
+  ["'Libre Baskerville', serif","Libre Baskerville"],
+  ["'Lora', serif","Lora"],
+  ["'DM Serif Display', serif","DM Serif Display"],
+  ["'Bodoni Moda', serif","Bodoni Moda"],
+  ["'Cinzel', serif","Cinzel"],
+  ["Georgia, serif","Georgia"],
+  ["'Montserrat', sans-serif","Montserrat"],
+  ["'Raleway', sans-serif","Raleway"],
+  ["'Josefin Sans', sans-serif","Josefin Sans"],
+  ["'Oswald', sans-serif","Oswald"],
+  ["Arial, sans-serif","Arial"],
+  ["'Bebas Neue', cursive","Bebas Neue"],
+  ["'Abril Fatface', cursive","Abril Fatface"],
+  ["'Pacifico', cursive","Pacifico"],
+  ["'Dancing Script', cursive","Dancing Script"],
+  ["'Great Vibes', cursive","Great Vibes"],
+  ["'Sacramento', cursive","Sacramento"],
+  ["'Satisfy', cursive","Satisfy"],
+  ["'Yesteryear', cursive","Yesteryear"],
+  ["'Kings', cursive","Kings"],
+  ["'Manufacturing Consent', cursive","Manufacturing Consent"],
+  ["'Mrs Sheppards', cursive","Mrs Sheppards"],
+  ["'Nanum Myeongjo', serif","나눔명조 (한글)"],
+  ["'Noto Serif KR', serif","Noto Serif KR (한글)"],
+  ["'Gowun Dodum', sans-serif","고운돋움 (한글)"],
+  ["'Song Myung', serif","송명 (한글)"],
+  ["'Bagel Fat One', cursive","배글팻원 (한글)"]
+].map(([v,n])=>`<option value="${v}" ${layer.font===v?'selected':''}>${n}</option>`).join('')}</select></div>
     <div class="prop-row"><span class="prop-label">크기</span><input type="number" class="prop-input" value="${layer.size}" min="6" max="300" onchange="updateLayerProp('${id}','size',+this.value)"></div>
     <div class="prop-row" style="flex-direction:column;align-items:stretch;gap:3px"><span class="prop-label" style="width:auto">색상</span><div id="tc_gp_${id}"></div></div>
     <div class="prop-row"><span class="prop-label">굵기</span><select class="prop-input" onchange="updateLayerProp('${id}','weight',this.value)">${[['300','Light'],['400','Regular'],['700','Bold'],['900','Black']].map(([v,n])=>`<option value="${v}" ${layer.weight==v?'selected':''}>${n}</option>`).join('')}</select></div>
     <div class="prop-row"><span class="prop-label">스타일</span><select class="prop-input" onchange="updateLayerProp('${id}','style',this.value)"><option value="normal" ${layer.style==='normal'?'selected':''}>Normal</option><option value="italic" ${layer.style==='italic'?'selected':''}>Italic</option></select></div>
     <div class="prop-row"><span class="prop-label">자간</span><input type="number" class="prop-input" value="${layer.letterSpacing||0}" onchange="updateLayerProp('${id}','letterSpacing',+this.value)"></div>
+    <div class="prop-row"><span class="prop-label">정렬</span>
+      <div style="display:flex;gap:3px;flex:1">
+        ${['left','center','right'].map(a=>`<button onclick="updateLayerProp('${id}','textAlign','${a}')" style="flex:1;padding:4px 0;border-radius:4px;border:1px solid var(--border);background:${(layer.textAlign||'left')===a?'var(--accent)':'transparent'};color:${(layer.textAlign||'left')===a?'#fff':'var(--text-dim)'};cursor:pointer;font-size:12px" title="${a==='left'?'왼쪽':a==='center'?'가운데':'오른쪽'}">${a==='left'?'≡':a==='center'?'≡':'≡'}</button>`).join('')}
+      </div>
+    </div>
+    <div class="prop-row">
+      <span class="prop-label">쓰기 방향</span>
+      <div style="display:flex;gap:3px;flex:1">
+        <button onclick="setTextDir('${id}','horizontal')" style="flex:1;padding:4px 2px;border-radius:4px;border:1px solid var(--border);background:${!layer.vertical?'var(--accent)':'transparent'};color:${!layer.vertical?'#fff':'var(--text-dim)'};cursor:pointer;font-size:11px;font-family:'Montserrat',sans-serif">가로 →</button>
+        <button onclick="setTextDir('${id}','vertical-rl')" style="flex:1;padding:4px 2px;border-radius:4px;border:1px solid var(--border);background:${layer.vertical&&layer.verticalDir!=='lr'?'var(--accent)':'transparent'};color:${layer.vertical&&layer.verticalDir!=='lr'?'#fff':'var(--text-dim)'};cursor:pointer;font-size:11px;font-family:'Montserrat',sans-serif">세로 ↓</button>
+        <button onclick="setTextDir('${id}','vertical-lr')" style="flex:1;padding:4px 2px;border-radius:4px;border:1px solid var(--border);background:${layer.vertical&&layer.verticalDir==='lr'?'var(--accent)':'transparent'};color:${layer.vertical&&layer.verticalDir==='lr'?'#fff':'var(--text-dim)'};cursor:pointer;font-size:11px;font-family:'Montserrat',sans-serif">세로 ↑</button>
+      </div>
+    </div>
     </div>
     <div style="margin:5px 0;border-top:1px solid var(--border);padding-top:8px"><div class="prop-section-title">✨ 텍스트 효과</div>
     <div class="prop-row"><span class="prop-label">그림자</span><label style="display:flex;align-items:center;gap:5px;font-size:11px;cursor:pointer"><input type="checkbox" ${layer.textShadow?'checked':''} onchange="updateLayerProp('${id}','textShadow',this.checked)"> 사용</label></div>
@@ -878,6 +1051,122 @@ function showLayerProps(id){
   }, 0);
 }
 function updateLayerProp(id,prop,val){const l=layers.find(l=>l.id===id);if(!l)return;pushHistory();l[prop]=val;renderLayers();showLayerProps(id);}
+// ══════════════════════════════════════════
+// CLIP IMAGE OFFSET CONTROL
+// ══════════════════════════════════════════
+function updateClipImg(id, prop, val){
+  const layer=layers.find(l=>l.id===id); if(!layer)return;
+  layer[prop]=val;
+  // 캔버스의 실제 clip 이미지 DOM 업데이트 (renderLayers 없이 즉시)
+  const img=document.getElementById('clipimg_'+id);
+  if(img){
+    const W=layer.width, H=layer.height;
+    const sc=layer.imgScale||1;
+    const scaledW=W*sc, scaledH=H*sc;
+    const ox=layer.imgOffsetX||0, oy=layer.imgOffsetY||0;
+    const ix=(W-scaledW)/2+ox;
+    const iy=(H-scaledH)/2+oy;
+    img.setAttribute('x', ix);
+    img.setAttribute('y', iy);
+    img.setAttribute('width', scaledW);
+    img.setAttribute('height', scaledH);
+  }
+  // 미리보기도 업데이트
+  updateClipPreview(id);
+}
+
+function updateClipPreview(id){
+  const layer=layers.find(l=>l.id===id); if(!layer)return;
+  const box=document.getElementById('clip_preview_'+id); if(!box)return;
+  const PW=120, PH=120;
+  const ratio=Math.min(PW/layer.width, PH/layer.height);
+  const sc=(layer.imgScale||1)*ratio;
+  const ox=(layer.imgOffsetX||0)*ratio;
+  const oy=(layer.imgOffsetY||0)*ratio;
+  // 기존 SVG 업데이트
+  const psvg=box.querySelector('svg'); if(!psvg)return;
+  const pimg=psvg.querySelector('image'); if(!pimg)return;
+  const scaledW=PW*sc, scaledH=PH*sc;
+  const ix=(PW-scaledW)/2+ox;
+  const iy=(PH-scaledH)/2+oy;
+  pimg.setAttribute('x', ix);
+  pimg.setAttribute('y', iy);
+  pimg.setAttribute('width', scaledW);
+  pimg.setAttribute('height', scaledH);
+}
+
+function resetClipImg(id){
+  const layer=layers.find(l=>l.id===id); if(!layer)return;
+  pushHistory();
+  layer.imgOffsetX=0; layer.imgOffsetY=0; layer.imgScale=1;
+  renderLayers(); showLayerProps(id);
+  showToast('이미지 위치 초기화');
+}
+
+function initClipPreviewDrag(box, id, PW, PH){
+  let dragging=false, startX=0, startY=0, startOx=0, startOy=0;
+  box.style.cursor='grab';
+  box.addEventListener('mousedown', e=>{
+    e.stopPropagation();
+    dragging=true;
+    startX=e.clientX; startY=e.clientY;
+    const layer=layers.find(l=>l.id===id);
+    startOx=layer?layer.imgOffsetX||0:0;
+    startOy=layer?layer.imgOffsetY||0:0;
+    box.style.cursor='grabbing';
+  });
+  document.addEventListener('mousemove', e=>{
+    if(!dragging)return;
+    const layer=layers.find(l=>l.id===id); if(!layer)return;
+    const ratio=Math.min(PW/layer.width, PH/layer.height);
+    const dx=(e.clientX-startX)/ratio;
+    const dy=(e.clientY-startY)/ratio;
+    layer.imgOffsetX=startOx+dx;
+    layer.imgOffsetY=startOy+dy;
+    // 슬라이더 값 업데이트
+    const oxEl=document.getElementById('clip_ox_'+id);
+    const oyEl=document.getElementById('clip_oy_'+id);
+    if(oxEl){oxEl.parentNode.querySelector('input[type=range]').value=Math.round(layer.imgOffsetX);oxEl.textContent=Math.round(layer.imgOffsetX);}
+    if(oyEl){oyEl.parentNode.querySelector('input[type=range]').value=Math.round(layer.imgOffsetY);oyEl.textContent=Math.round(layer.imgOffsetY);}
+    // 캔버스 + 미리보기 즉시 반영
+    updateClipImg(id,'imgOffsetX',layer.imgOffsetX);
+    updateClipImg(id,'imgOffsetY',layer.imgOffsetY);
+  });
+  document.addEventListener('mouseup', ()=>{
+    if(dragging){ dragging=false; box.style.cursor='grab'; }
+  });
+}
+
+// Shift+드래그로 캔버스에서 직접 이미지 이동
+function startClipImgDrag(e, id){
+  const layer=layers.find(l=>l.id===id); if(!layer)return;
+  e.stopPropagation();
+  let startX=e.clientX, startY=e.clientY;
+  const startOx=layer.imgOffsetX||0, startOy=layer.imgOffsetY||0;
+  const onMove=e2=>{
+    layer.imgOffsetX=startOx+(e2.clientX-startX)/zoom;
+    layer.imgOffsetY=startOy+(e2.clientY-startY)/zoom;
+    updateClipImg(id,'imgOffsetX',layer.imgOffsetX);
+    updateClipImg(id,'imgOffsetY',layer.imgOffsetY);
+    if(selectedId===id) updateClipPreview(id);
+  };
+  const onUp=()=>{document.removeEventListener('mousemove',onMove);document.removeEventListener('mouseup',onUp);};
+  document.addEventListener('mousemove',onMove);
+  document.addEventListener('mouseup',onUp);
+}
+
+function setTextDir(id, dir){
+  const layer=layers.find(l=>l.id===id); if(!layer)return;
+  pushHistory();
+  if(dir==='horizontal'){
+    layer.vertical=false; layer.verticalDir='';
+  } else if(dir==='vertical-rl'){
+    layer.vertical=true; layer.verticalDir='rl';
+  } else {
+    layer.vertical=true; layer.verticalDir='lr';
+  }
+  renderLayers(); showLayerProps(id);
+}
 function liveTextEdit(id,val){
   const l=layers.find(l=>l.id===id);if(!l)return;
   l.text=val;
