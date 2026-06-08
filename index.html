@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화송이 스튜디오</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0ede8;--panel:#faf8f5;--panel2:#f0ede8;--border:#ddd8d0;--accent:#b07d3a;--accent2:#d94f4f;--text:#2a2118;--text-dim:#8a7e70;--shadow:rgba(80,60,30,.15)}
+html{height:100%}*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;height:100vh;max-height:100vh;display:flex;flex-direction:column;overflow:hidden}
+header{display:flex;align-items:center;justify-content:space-between;padding:0 14px;height:50px;background:var(--panel);border-bottom:1px solid var(--border);flex-shrink:0;z-index:100;gap:6px}
+.logo{font-family:'Nanum Myeongjo',serif;font-size:17px;font-weight:700;letter-spacing:.04em;color:var(--accent);white-space:nowrap}
+.logo span{color:var(--text-dim);font-weight:300;font-size:11px;margin-left:5px}
+.header-actions{display:flex;gap:5px;flex-shrink:0}
+.btn{padding:5px 11px;border-radius:4px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.04em;cursor:pointer;border:none;transition:all .2s}
+.btn-ghost{background:transparent;color:var(--text-dim);border:1px solid var(--border)}
+.btn-ghost:hover{color:var(--text);border-color:var(--accent);background:rgba(176,125,58,.07)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#9a6a28}
+.btn-danger{background:transparent;color:var(--accent2);border:1px solid var(--accent2)}
+.btn-danger:hover{background:var(--accent2);color:#fff}
+.btn-icon{padding:5px 7px;font-size:13px}
+.workspace{display:flex;flex:1;min-height:0;overflow:hidden;align-items:stretch}
+.panel-layers{width:218px;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;height:100%;min-height:0;overflow:hidden}
+.panel-title{padding:9px 13px;font-size:9px;font-weight:700;letter-spacing:.15em;color:var(--text-dim);border-bottom:1px solid var(--border);text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.panel-title button{background:none;border:1px solid var(--border);color:var(--text-dim);width:19px;height:19px;border-radius:3px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.panel-title button:hover{color:var(--accent);border-color:var(--accent)}
+.sample-section{border-bottom:1px solid var(--border);flex-shrink:0;overflow:hidden}
+.sample-header{padding:7px 11px 5px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.sample-header-left{display:flex;align-items:center;gap:4px;font-size:9px;font-weight:700;letter-spacing:.13em;color:var(--text-dim);text-transform:uppercase}
+.sample-toggle{font-size:9px;color:var(--text-dim);transition:transform .25s}
+.sample-toggle.open{transform:rotate(180deg)}
+.sample-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:0 5px 5px;overflow:visible;max-height:0;transition:max-height .35s ease}
+.sample-grid.open{max-height:200px}
+.sample-card{position:relative;aspect-ratio:5/3;height:38px;border-radius:3px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:border-color .18s,transform .13s}
+.sample-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.sc-classic{background:linear-gradient(160deg,#1a0a2e,#2d1555 40%,#0f0720)}
+.sc-noir{background:linear-gradient(160deg,#080808,#1a1a1a 60%,#050505)}
+.sc-nature{background:linear-gradient(160deg,#0d1f12,#1a3a20 50%,#0a2010)}
+.sc-modern{background:linear-gradient(135deg,#0a0a0a,#1a1a1a 50%,#2a1a0a)}
+.sc-editorial{background:linear-gradient(180deg,#f5f0e8,#e8ddd0)}.sc-vogue{background:#ffffff;border:1px solid #e0e0e0}
+.sc-pastel{background:linear-gradient(135deg,#f8e8f0,#e8d8f0 50%,#d8e8f8)}
+.sc-inner{position:absolute;inset:0;padding:4px 6px;display:flex;flex-direction:column;justify-content:space-between;font-family:'Playfair Display',serif}
+.sc-mag-title{font-size:10px;font-weight:900;letter-spacing:.04em;line-height:1}
+.sc-sub{font-size:3px;letter-spacing:.15em;font-weight:600;text-transform:uppercase;margin-top:1px;font-family:'Montserrat',sans-serif}
+.sc-bottom{display:flex;flex-direction:column}
+.sc-feature{font-size:3.5px;font-weight:700;letter-spacing:.05em;line-height:1.3;font-family:'Montserrat',sans-serif}
+.sc-bar{width:10px;height:1px;margin:2px 0}
+.sc-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.82),transparent);padding:4px 5px 3px;font-size:5px;font-weight:700;color:#fff;font-family:'Montserrat',sans-serif}
+.sc-label span{display:block;font-size:4.5px;font-weight:400;opacity:.65;margin-top:1px}
+.sample-loading{position:absolute;inset:0;background:rgba(176,125,58,.88);display:flex;align-items:center;justify-content:center;border-radius:3px;font-size:7px;font-weight:700;color:#fff;font-family:'Montserrat',sans-serif;opacity:0;transition:opacity .18s;pointer-events:none}
+.sample-card:hover .sample-loading{opacity:1}
+.layer-list{flex:1;min-height:0;overflow-y:auto;padding:5px}
+.layer-list::-webkit-scrollbar{width:4px}
+.layer-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.layer-item{display:flex;align-items:center;gap:5px;padding:5px 7px;border-radius:5px;cursor:pointer;border:1px solid transparent;margin-bottom:2px;transition:all .15s;user-select:none}
+.layer-item:hover{background:rgba(176,125,58,.06)}
+.layer-item.selected{background:rgba(201,169,110,.12);border-color:rgba(201,169,110,.4)}
+.layer-item.dragging{opacity:.4}
+.layer-item.drag-over{border-top:2px solid var(--accent)}
+.layer-drag-handle{color:var(--text-dim);font-size:11px;cursor:grab;opacity:.5;flex-shrink:0}
+.layer-thumb{width:26px;height:26px;border-radius:3px;background:var(--border);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px}
+.layer-thumb img{width:100%;height:100%;object-fit:cover}
+.layer-info{flex:1;min-width:0}
+.layer-name{font-size:11px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.layer-type{font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em}
+.layer-controls{display:flex;gap:2px;flex-shrink:0}
+.layer-btn{width:17px;height:17px;background:none;border:none;color:var(--text-dim);cursor:pointer;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;transition:all .15s}
+.layer-btn:hover{color:var(--text);background:var(--border)}
+.layer-btn.active{color:var(--accent)}
+.add-layer-section{padding:6px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:3px;flex-shrink:0}
+.add-layer-btn{width:100%;padding:6px;background:transparent;border:1px dashed var(--border);color:var(--text-dim);border-radius:5px;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;transition:all .2s;display:flex;align-items:center;gap:5px;justify-content:center}
+.add-layer-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.05)}
+.canvas-center{flex:1;position:relative;display:flex;min-width:0;min-height:0;overflow:hidden}
+.canvas-area{display:block;width:100%;height:100%;overflow:auto;background-color:#e8e4de;background-image:linear-gradient(rgba(170,158,140,.4) 1px,transparent 1px),linear-gradient(90deg,rgba(170,158,140,.4) 1px,transparent 1px);background-size:24px 24px}
+.canvas-area::-webkit-scrollbar{width:7px;height:7px}
+.canvas-area::-webkit-scrollbar-track{background:#ddd8d0}
+.canvas-area::-webkit-scrollbar-thumb{background:#b8afa3;border-radius:4px}
+.canvas-scroll-inner{display:flex;align-items:center;justify-content:center;min-width:100%;min-height:100%;padding:48px;box-sizing:border-box}
+.canvas-wrap{position:relative;flex-shrink:0;box-shadow:0 8px 40px rgba(80,60,30,.18),0 0 0 1px rgba(180,160,120,.25);overflow:hidden}
+#magazine-canvas{position:relative;overflow:hidden;background:#fff}
+#guideOverlay{position:absolute;inset:0;pointer-events:none;z-index:9999}
+.guide-line{position:absolute;background:rgba(0,120,255,.45)}
+.guide-line.h{left:0;right:0;height:1px}
+.guide-line.v{top:0;bottom:0;width:1px}
+.canvas-layer{position:absolute;cursor:move;user-select:none}
+.canvas-layer.selected::after{content:'';position:absolute;inset:-2px;border:2px solid var(--accent);pointer-events:none;border-radius:2px}
+.resize-handle{position:absolute;width:8px;height:8px;background:var(--accent);border:1px solid #fff;border-radius:50%}
+.resize-handle.br{bottom:-4px;right:-4px;cursor:nwse-resize}
+.resize-handle.bl{bottom:-4px;left:-4px;cursor:nesw-resize}
+.resize-handle.tr{top:-4px;right:-4px;cursor:nesw-resize}
+.resize-handle.tl{top:-4px;left:-4px;cursor:nwse-resize}
+.zoom-controls{position:absolute;bottom:12px;right:12px;display:flex;gap:4px;z-index:50}
+.zoom-btn{height:28px;background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:5px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 8px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;transition:all .2s;box-shadow:0 1px 4px var(--shadow)}
+.zoom-btn:hover{border-color:var(--accent);color:var(--accent)}
+.empty-canvas-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
+.empty-canvas-hint .hint-icon{font-size:38px;opacity:.15;margin-bottom:8px}
+.empty-canvas-hint p{font-size:11px;color:rgba(0,0,0,.2);letter-spacing:.05em}
+.panel-props{width:260px;background:var(--panel);border-left:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;height:100%;min-height:0;overflow-y:auto}
+.panel-props::-webkit-scrollbar{width:4px}
+.panel-props::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.prop-section{border-bottom:1px solid var(--border);padding:11px 13px}
+.prop-section-title{font-size:9px;font-weight:700;letter-spacing:.14em;color:var(--text-dim);text-transform:uppercase;margin-bottom:9px}
+.prop-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:6px}
+.prop-label{font-size:10px;color:var(--text-dim);flex-shrink:0;width:52px}
+.prop-input{flex:1;background:#fff;border:1px solid var(--border);color:var(--text);padding:4px 6px;border-radius:4px;font-family:'Montserrat',sans-serif;font-size:11px;outline:none;transition:border-color .2s;width:100%}
+.prop-input:focus{border-color:var(--accent)}
+.prop-input[type="color"]{padding:2px 3px;height:25px;cursor:pointer}
+.prop-input[type="range"]{padding:0;height:auto;accent-color:var(--accent)}
+select.prop-input{cursor:pointer}
+.size-presets{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px}
+.size-preset{padding:3px 7px;border:1px solid var(--border);border-radius:4px;font-size:10px;cursor:pointer;transition:all .2s;background:transparent;color:var(--text-dim);font-family:'Montserrat',sans-serif}
+.size-preset:hover{border-color:var(--accent);color:var(--accent)}
+.no-layer-msg{padding:18px 10px;text-align:center;color:var(--text-dim);font-size:11px}
+.modal-overlay{position:fixed;inset:0;background:rgba(60,45,25,.45);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;width:390px;max-width:90vw;transform:translateY(10px);transition:transform .2s}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal h3{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:13px;color:var(--accent)}
+.modal-tabs{display:flex;gap:3px;margin-bottom:12px}
+.modal-tab{flex:1;padding:6px;background:transparent;border:1px solid var(--border);color:var(--text-dim);cursor:pointer;border-radius:4px;font-size:11px;font-family:'Montserrat',sans-serif;font-weight:600;transition:all .2s}
+.modal-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.modal-content{display:none}
+.modal-content.active{display:block}
+.modal-actions{display:flex;justify-content:flex-end;gap:6px;margin-top:13px}
+.drop-zone{border:2px dashed var(--border);border-radius:7px;padding:26px 13px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+.drop-zone:hover,.drop-zone.dragover{border-color:var(--accent);background:rgba(201,169,110,.05)}
+.drop-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.drop-zone-icon{font-size:26px;margin-bottom:6px}
+.drop-zone-text{font-size:11px;color:var(--text-dim)}
+.drop-zone-text strong{color:var(--accent)}
+.text-input-area{width:100%;background:#fff;border:1px solid var(--border);color:var(--text);padding:8px;border-radius:5px;font-family:'Montserrat',sans-serif;font-size:11px;resize:vertical;min-height:52px;outline:none}
+.text-input-area:focus{border-color:var(--accent)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#2a2118;border:1px solid rgba(255,255,255,.1);color:#fff;padding:8px 16px;border-radius:5px;font-size:11px;transition:transform .3s;z-index:999}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.mockup-preview-area{position:relative;display:flex;align-items:center;justify-content:center;min-height:380px;border-radius:8px;overflow:hidden;transition:background .3s}
+.mockup-preview-area.transparent-bg{background-image:linear-gradient(45deg,#ccc 25%,transparent 25%),linear-gradient(-45deg,#ccc 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#ccc 75%),linear-gradient(-45deg,transparent 75%,#ccc 75%);background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0;background-color:#fff}
+.mockup-flatbook{position:relative;display:inline-block;border-radius:4px 10px 10px 4px;overflow:hidden;box-shadow:-6px 0 18px rgba(0,0,0,.28),4px 8px 32px rgba(0,0,0,.30);transition:box-shadow .3s,transform .3s}
+.mockup-flatbook:hover{transform:translateY(-4px) scale(1.01);box-shadow:-6px 0 22px rgba(0,0,0,.32),8px 16px 48px rgba(0,0,0,.35)}
+.mockup-flatbook::before{content:'';position:absolute;left:0;top:0;bottom:0;width:14px;background:linear-gradient(to right,rgba(0,0,0,.35),rgba(0,0,0,.15) 50%,rgba(255,255,255,.04));z-index:2;pointer-events:none}
+.mockup-flatbook::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.08) 25%,transparent 55%,rgba(0,0,0,.06));z-index:3;pointer-events:none;border-radius:inherit}
+.mockup-flatbook img{display:block;width:100%;height:100%;object-fit:cover}
+.mockup-bg-palette{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.mockup-bg-swatch{width:21px;height:21px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0}
+.mockup-bg-swatch:hover{transform:scale(1.15)}
+.mockup-bg-swatch.active{border-color:var(--accent);box-shadow:0 0 0 2px rgba(176,125,58,.35)}
+.mockup-bg-swatch.transparent-swatch{background-image:linear-gradient(45deg,#aaa 25%,transparent 25%),linear-gradient(-45deg,#aaa 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#aaa 75%),linear-gradient(-45deg,transparent 75%,#aaa 75%);background-size:8px 8px;background-position:0 0,0 4px,4px -4px,-4px 0;background-color:#fff}
+
+  /* ── GRADIENT PICKER ── */
+  .grad-picker {
+    display:flex; flex-direction:column; gap:5px; width:100%;
+  }
+  .grad-mode-tabs {
+    display:flex; gap:3px; margin-bottom:1px;
+  }
+  .grad-mode-tab {
+    flex:1; padding:3px 0; font-size:9px; font-weight:700;
+    letter-spacing:.05em; border-radius:4px; cursor:pointer;
+    border:1px solid var(--border); background:transparent;
+    color:var(--text-dim); transition:all .15s; font-family:'Montserrat',sans-serif;
+  }
+  .grad-mode-tab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .grad-row { display:flex; align-items:center; gap:6px; }
+  .grad-preview {
+    width:100%; height:18px; border-radius:4px;
+    border:1px solid var(--border); margin:2px 0 1px;
+    cursor:pointer; transition:border-color .15s;
+  }
+  .grad-preview:hover { border-color:var(--accent); }
+  .grad-angle-wrap { display:flex; align-items:center; gap:5px; }
+  .grad-angle-dial {
+    width:28px; height:28px; border-radius:50%;
+    border:2px solid var(--border); cursor:pointer;
+    position:relative; background:var(--panel2);
+    flex-shrink:0;
+  }
+  .grad-angle-dial::after {
+    content:''; position:absolute;
+    top:50%; left:50%; width:2px; height:10px;
+    background:var(--accent); border-radius:1px;
+    transform-origin:top center;
+    transform:translateX(-50%) rotate(0deg);
+  }
+
+  /* ── STICKER GRID ── */
+  .sticker-categories {
+    display:flex; gap:4px; flex-wrap:wrap; margin-bottom:8px;
+  }
+  .sticker-cat-btn {
+    padding:3px 8px; font-size:10px; font-weight:600;
+    border-radius:12px; border:1px solid var(--border);
+    background:transparent; color:var(--text-dim);
+    cursor:pointer; transition:all .15s;
+    font-family:'Montserrat',sans-serif;
+  }
+  .sticker-cat-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .sticker-grid {
+    display:grid; grid-template-columns:repeat(5,1fr); gap:6px;
+    max-height:220px; overflow-y:auto; padding:4px 2px;
+  }
+  .sticker-grid::-webkit-scrollbar{width:4px}
+  .sticker-grid::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+  .sticker-item {
+    aspect-ratio:1; border-radius:6px; border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:all .15s; background:var(--panel2);
+    font-size:20px;
+  }
+  .sticker-item:hover { border-color:var(--accent); transform:scale(1.1); background:rgba(176,125,58,.08); }
+  .sticker-item svg { width:28px; height:28px; }
+  /* 스티커 색상 조절 */
+  .sticker-color-row { display:flex; align-items:center; gap:6px; margin-top:8px; }
+
+  /* ── CLIP MASK ── */
+  .clip-shape-grid {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-top:6px;
+  }
+  .clip-shape-btn {
+    aspect-ratio:1; border-radius:6px; border:2px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:all .15s; background:var(--panel2); font-size:22px;
+  }
+  .clip-shape-btn:hover { border-color:var(--accent); }
+  .clip-shape-btn.active { border-color:var(--accent); background:rgba(176,125,58,.1); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">화송이 스튜디오 <span>Cover Creator</span></div>
+  <div class="header-actions">
+    <button class="btn btn-ghost btn-icon" onclick="undo()" title="실행취소 (Ctrl+Z)">↩</button>
+    <button class="btn btn-ghost btn-icon" onclick="toggleGuide()" id="guideBtn" title="가이드라인 토글">⊞</button>
+    <button class="btn btn-ghost" onclick="showAddLayerType('image')" title="이미지">🖼</button>
+    <button class="btn btn-ghost" onclick="showAddLayerType('text')" title="텍스트">✏️</button>
+    <button class="btn btn-ghost" onclick="showAddLayerType('shape')" title="도형">▭</button>
+    <button class="btn btn-ghost" onclick="showAddLayerType('sticker')" title="스티커">✦</button>
+    <button class="btn btn-ghost" onclick="showAddLayerType('clip')" title="클리핑 마스크">⬡</button>
+    <button class="btn btn-ghost" onclick="saveProject()">💾 저장</button>
+    <button class="btn btn-ghost" onclick="loadProject()">📂 불러오기</button>
+    <button class="btn btn-ghost" onclick="clearCanvas()">초기화</button>
+    <button class="btn btn-primary" onclick="openExportModal()">📥 내보내기</button>
+  </div>
+</header>
+
+<div class="workspace">
+  <div class="panel-layers">
+    <div class="sample-section">
+      <div class="sample-header" onclick="toggleSamples()">
+        <div class="sample-header-left"><span>✦</span> 샘플 템플릿</div>
+        <span class="sample-toggle" id="sampleToggle">▾</span>
+      </div>
+      <div class="sample-grid" id="sampleGrid">
+        <div class="sample-card sc-vogue" onclick="loadSample('classic')"><div class="sc-inner" style="background:#fff"><div><div class="sc-mag-title" style="color:#111;font-size:13px;letter-spacing:-0.5px">VOGUE</div><div class="sc-sub" style="color:#cc2222;letter-spacing:.1em">KOREA MAN</div></div><div class="sc-bottom"><div class="sc-feature" style="color:#111;font-size:3.5px">COVER NAME<br><span style="color:#cc2222">LONGEST CHARTING</span></div></div></div><div class="sc-label" style="background:linear-gradient(to top,rgba(0,0,0,.7),transparent)">샘플 레이아웃<span>화이트·블랙</span></div><div class="sample-loading">적용하기</div></div>
+        <div class="sample-card sc-noir" onclick="loadSample('noir')"><div class="sc-inner"><div><div class="sc-mag-title" style="color:#fff;letter-spacing:.08em">NOIR</div><div class="sc-sub" style="color:#fff;opacity:.4">EDITORIAL</div></div><div class="sc-bottom"><div style="width:100%;height:1px;background:rgba(255,255,255,.12);margin-bottom:3px"></div><div class="sc-feature" style="color:#fff">DARK FANTASY</div></div></div><div class="sc-label">다크 에디토리얼<span>흑백 미니멀</span></div><div class="sample-loading">적용하기</div></div>
+        <div class="sample-card sc-nature" onclick="loadSample('nature')"><div class="sc-inner"><div><div class="sc-mag-title" style="color:#7ecb8a;letter-spacing:.1em">FLORA</div><div class="sc-sub" style="color:#7ecb8a;opacity:.8">LIVING</div></div><div class="sc-bottom"><div class="sc-feature" style="color:#7ecb8a">KNOW-HOW</div></div></div><div class="sc-label">네이처 그린<span>자연·봄</span></div><div class="sample-loading">적용하기</div></div>
+        <div class="sample-card sc-modern" onclick="loadSample('modern')"><div class="sc-inner"><div><div class="sc-mag-title" style="color:#c9a96e;font-size:13px">M</div><div class="sc-sub" style="color:rgba(255,255,255,.3)">MAGAZINE</div></div><div class="sc-bottom"><div class="sc-feature" style="color:#c9a96e">ON COVER</div></div></div><div class="sc-label">모던 미니멀<span>블랙·골드</span></div><div class="sample-loading">적용하기</div></div>
+        <div class="sample-card sc-editorial" onclick="loadSample('editorial')"><div class="sc-inner"><div><div class="sc-mag-title" style="color:#2a1a0a;font-size:9px">LUMIÈRE</div><div class="sc-sub" style="color:rgba(42,26,10,.45)">PARIS</div></div><div class="sc-bottom"><div class="sc-feature" style="color:#8b6914">PRINTEMPS</div></div></div><div class="sc-label" style="background:linear-gradient(to top,rgba(42,26,10,.5),transparent);color:#2a1a0a">라이트 에디토리얼<span style="color:rgba(42,26,10,.6)">크림·베이지</span></div><div class="sample-loading">적용하기</div></div>
+        <div class="sample-card sc-pastel" onclick="loadSample('pastel')"><div class="sc-inner"><div><div class="sc-mag-title" style="color:#8a5fa0;font-size:9px;letter-spacing:.08em">RÊVE</div><div class="sc-sub" style="color:#8a5fa0;opacity:.6">DOUX</div></div><div class="sc-bottom"><div class="sc-feature" style="color:#8a5fa0">DREAM</div></div></div><div class="sc-label" style="background:linear-gradient(to top,rgba(138,95,160,.5),transparent)">파스텔 드림<span>소프트 핑크</span></div><div class="sample-loading">적용하기</div></div>
+      </div>
+    </div>
+    <div class="panel-title">레이어 순서 <button onclick="showAddLayerType('image')" title="+">+</button></div>
+    <div class="layer-list" id="layerList"><div class="no-layer-msg">레이어를 추가해보세요<br>드래그로 순서 변경 가능</div></div>
+    <div class="add-layer-section">
+      <button class="add-layer-btn" onclick="showAddLayerType('image')">🖼 이미지 레이어</button>
+      <button class="add-layer-btn" onclick="showAddLayerType('text')">✏️ 텍스트 레이어</button>
+      <button class="add-layer-btn" onclick="showAddLayerType('shape')">▭ 도형 레이어</button>
+      <button class="add-layer-btn" onclick="showAddLayerType('sticker')">✦ 스티커 레이어</button>
+      <button class="add-layer-btn" onclick="showAddLayerType('clip')">⬡ 클리핑 마스크</button>
+    </div>
+  </div>
+
+  <div class="canvas-center" id="canvasCenter">
+    <div class="canvas-area" id="canvasArea">
+      <div class="canvas-scroll-inner" id="canvasScrollInner">
+        <div class="canvas-wrap" id="canvasWrap">
+          <div id="magazine-canvas">
+            <div id="guideOverlay"></div>
+            <div class="empty-canvas-hint" id="emptyHint"><div class="hint-icon">🎨</div><p>레이어를 추가해서<br>잡지 표지를 만들어보세요</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="zoom-controls">
+      <button class="zoom-btn" onclick="adjustZoom(-.1)">−</button>
+      <div class="zoom-btn" id="zoomLabel" style="cursor:default;min-width:44px;justify-content:center">100%</div>
+      <button class="zoom-btn" onclick="adjustZoom(.1)">+</button>
+      <button class="zoom-btn" onclick="fitZoom()">맞춤</button>
+    </div>
+  </div>
+
+  <div class="panel-props" id="propsPanel">
+    <div class="prop-section">
+      <div class="prop-section-title">캔버스 설정</div>
+      <div class="size-presets">
+        <button class="size-preset" onclick="setCanvasSize(500,700)">A4 세로</button>
+        <button class="size-preset" onclick="setCanvasSize(700,500)">A4 가로</button>
+        <button class="size-preset" onclick="setCanvasSize(354,500)">A5 세로</button>
+        <button class="size-preset" onclick="setCanvasSize(500,500)">정사각형</button>
+      </div>
+      <div style="margin-bottom:4px"><span class="prop-label" style="display:block;margin-bottom:5px">배경색</span>
+        <div id="bgGradPicker"></div>
+        <input type="hidden" id="bgColor" value="#ffffff">
+      </div>
+      <div class="prop-row"><span class="prop-label">너비</span><input type="number" class="prop-input" id="canvasW" value="500" onchange="setCanvasSize(this.value,document.getElementById('canvasH').value)"></div>
+      <div class="prop-row"><span class="prop-label">높이</span><input type="number" class="prop-input" id="canvasH" value="700" onchange="setCanvasSize(document.getElementById('canvasW').value,this.value)"></div>
+      <div class="prop-row" style="margin-top:4px"><button class="btn btn-ghost" style="width:100%;font-size:10px;display:flex;align-items:center;justify-content:center;gap:5px" onclick="openMockup()">📖 잡지 목업으로 보기</button></div>
+    </div>
+    <div class="prop-section" id="layerProps" style="display:none">
+      <div class="prop-section-title">레이어 속성</div>
+      <div id="layerPropsContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD LAYER MODAL -->
+<div class="modal-overlay" id="newLayerModal">
+  <div class="modal">
+    <h3>레이어 추가</h3>
+    <div class="modal-tabs" style="flex-wrap:wrap;">
+      <button class="modal-tab active" onclick="switchTab('image')">🖼 이미지</button>
+      <button class="modal-tab" onclick="switchTab('text')">✏️ 텍스트</button>
+      <button class="modal-tab" onclick="switchTab('shape')">▭ 도형</button>
+      <button class="modal-tab" onclick="switchTab('sticker')">✦ 스티커</button>
+      <button class="modal-tab" onclick="switchTab('clip')">⬡ 클리핑</button>
+    </div>
+    <div class="modal-content active" id="tab-image">
+      <div class="drop-zone" id="dropZone"><input type="file" accept="image/*" id="imageInput" onchange="handleImageUpload(event)"><div class="drop-zone-icon">🖼</div><div class="drop-zone-text">클릭하거나 드래그하세요<br><strong>JPG, PNG, WEBP, GIF</strong></div></div>
+    </div>
+    <div class="modal-content" id="tab-text">
+      <div class="prop-row"><span class="prop-label">내용</span><textarea class="text-input-area" id="textContent" placeholder="텍스트 입력">MAGAZINE</textarea></div>
+      <div class="prop-row"><span class="prop-label">폰트</span><select class="prop-input" id="textFont"><option value="'Playfair Display', serif">Playfair Display</option><option value="'Cormorant Garamond', serif">Cormorant Garamond</option><option value="'Montserrat', sans-serif">Montserrat</option><option value="'Nanum Myeongjo', serif">나눔명조</option><option value="Georgia, serif">Georgia</option><option value="Arial, sans-serif">Arial</option></select></div>
+      <div class="prop-row"><span class="prop-label">크기</span><input type="number" class="prop-input" id="textSize" value="48" min="6" max="300"></div>
+      <div class="prop-row"><span class="prop-label">색상</span><input type="color" class="prop-input" id="textColor" value="#ffffff"></div>
+      <div class="prop-row"><span class="prop-label">굵기</span><select class="prop-input" id="textWeight"><option value="300">Light</option><option value="400">Regular</option><option value="700" selected>Bold</option><option value="900">Black</option></select></div>
+      <div class="prop-row"><span class="prop-label">스타일</span><select class="prop-input" id="textStyle"><option value="normal">Normal</option><option value="italic">Italic</option></select></div>
+    </div>
+    <div class="modal-content" id="tab-shape">
+      <div class="prop-row"><span class="prop-label">모양</span><select class="prop-input" id="shapeType" onchange="onShapeTypeChange()"><option value="rect">사각형</option><option value="circle">원형</option><option value="line">직선</option><option value="curve-wave">물결 곡선</option><option value="curve-arc">아치 곡선</option><option value="curve-s">S자 곡선</option><option value="curve-diagonal">대각선 곡선</option></select></div>
+      <div class="prop-row"><span class="prop-label">색상</span><input type="color" class="prop-input" id="shapeColor" value="#c9a96e"></div>
+      <div class="prop-row" id="shapeStrokeRow" style="display:none"><span class="prop-label">두께</span><input type="number" class="prop-input" id="shapeStroke" value="2" min="1" max="30"></div>
+      <div class="prop-row" id="shapeBorderRow"><span class="prop-label">테두리</span><input type="number" class="prop-input" id="shapeBorder" value="0" min="0" max="20"></div>
+      <div class="prop-row" id="shapeBorderColorRow"><span class="prop-label">테두리색</span><input type="color" class="prop-input" id="shapeBorderColor" value="#000000"></div>
+      <div class="prop-row" id="shapeCurveRow" style="display:none"><span class="prop-label">곡률</span><div style="flex:1;display:flex;gap:5px;align-items:center"><input type="range" class="prop-input" id="shapeCurve" min="5" max="150" value="50" oninput="document.getElementById('scv').textContent=this.value"><span id="scv" style="font-size:10px;color:var(--text-dim);width:22px;text-align:right">50</span></div></div>
+      <div class="prop-row"><span class="prop-label">투명도</span><input type="range" class="prop-input" id="shapeOpacity" min="0" max="100" value="100"></div>
+      <div class="prop-row"><span class="prop-label">너비</span><input type="number" class="prop-input" id="shapeW" value="200"></div>
+      <div class="prop-row" id="shapeHRow"><span class="prop-label">높이</span><input type="number" class="prop-input" id="shapeH" value="200"></div>
+    </div>
+    <!-- 스티커 탭 -->
+    <div class="modal-content" id="tab-sticker">
+      <div class="sticker-categories">
+        <button class="sticker-cat-btn active" onclick="showStickerCat('star',this)">별·빛</button>
+        <button class="sticker-cat-btn" onclick="showStickerCat('flower',this)">꽃·자연</button>
+        <button class="sticker-cat-btn" onclick="showStickerCat('arrow',this)">화살표</button>
+        <button class="sticker-cat-btn" onclick="showStickerCat('geo',this)">기하학</button>
+        <button class="sticker-cat-btn" onclick="showStickerCat('deco',this)">장식</button>
+      </div>
+      <div class="sticker-grid" id="stickerGrid"></div>
+      <div class="sticker-color-row">
+        <span style="font-size:10px;color:var(--text-dim);flex-shrink:0">색상</span>
+        <input type="color" id="stickerColor" value="#b07d3a"
+          style="width:28px;height:28px;border-radius:50%;border:1px solid var(--border);cursor:pointer;padding:1px 2px">
+        <span style="font-size:10px;color:var(--text-dim);flex-shrink:0;margin-left:6px">크기</span>
+        <input type="number" id="stickerSize" value="80" min="20" max="400" class="prop-input" style="width:60px">
+      </div>
+    </div>
+
+    <!-- 클리핑 마스크 탭 -->
+    <div class="modal-content" id="tab-clip">
+      <div style="font-size:11px;color:var(--text-dim);margin-bottom:8px">이미지를 원하는 모양으로 잘라냅니다.<br>먼저 이미지를 업로드한 후 모양을 선택하세요.</div>
+      <div class="prop-row">
+        <span class="prop-label">이미지</span>
+        <div style="flex:1">
+          <div class="drop-zone" id="clipDropZone" style="padding:12px">
+            <input type="file" accept="image/*" id="clipImageInput" onchange="handleClipImageUpload(event)">
+            <div class="drop-zone-icon" style="font-size:20px">🖼</div>
+            <div class="drop-zone-text" style="font-size:11px" id="clipFileName">클릭하거나 드래그</div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:10px;font-weight:600;color:var(--text-dim);margin:8px 0 4px">마스크 모양 선택</div>
+      <div class="clip-shape-grid" id="clipShapeGrid">
+        <div class="clip-shape-btn active" data-shape="rect" onclick="selectClipShape('rect',this)" title="사각형">▭</div>
+        <div class="clip-shape-btn" data-shape="circle" onclick="selectClipShape('circle',this)" title="원형">◯</div>
+        <div class="clip-shape-btn" data-shape="rounded" onclick="selectClipShape('rounded',this)" title="둥근 사각형">▢</div>
+        <div class="clip-shape-btn" data-shape="diamond" onclick="selectClipShape('diamond',this)" title="마름모">◇</div>
+        <div class="clip-shape-btn" data-shape="hexagon" onclick="selectClipShape('hexagon',this)" title="육각형">⬡</div>
+        <div class="clip-shape-btn" data-shape="triangle" onclick="selectClipShape('triangle',this)" title="삼각형">△</div>
+        <div class="clip-shape-btn" data-shape="star5" onclick="selectClipShape('star5',this)" title="별">★</div>
+        <div class="clip-shape-btn" data-shape="ellipse" onclick="selectClipShape('ellipse',this)" title="타원">⬭</div>
+      </div>
+      <div class="prop-row" style="margin-top:8px">
+        <span class="prop-label">크기</span>
+        <input type="number" id="clipSize" value="200" min="50" max="500" class="prop-input">
+      </div>
+    </div>
+
+    <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal('newLayerModal')">취소</button><button class="btn btn-primary" onclick="addLayer()">추가하기</button></div>
+  </div>
+</div>
+
+<!-- EXPORT MODAL -->
+<div class="modal-overlay" id="exportModal">
+  <div class="modal">
+    <h3>📥 내보내기 설정</h3>
+    <div class="prop-row"><span class="prop-label">해상도</span><select class="prop-input" id="exportScale"><option value="1">1× 기본</option><option value="2" selected>2× 고해상도</option><option value="3">3× 초고해상도</option><option value="4">4× 인쇄용</option></select></div>
+    <div class="prop-row"><span class="prop-label">포맷</span><select class="prop-input" id="exportFormat" onchange="document.getElementById('jqRow').style.display=this.value==='image/jpeg'?'':'none'"><option value="image/png">PNG (투명 지원)</option><option value="image/jpeg">JPEG (작은 용량)</option></select></div>
+    <div class="prop-row" id="jqRow" style="display:none"><span class="prop-label">품질</span><input type="range" class="prop-input" id="exportQuality" min="50" max="100" value="92"></div>
+    <div style="background:var(--panel2);border-radius:5px;padding:9px 11px;font-size:11px;color:var(--text-dim);margin:10px 0" id="exportInfo">2× 해상도 PNG로 저장됩니다</div>
+    <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal('exportModal')">취소</button><button class="btn btn-primary" onclick="doExport()">💾 저장하기</button></div>
+  </div>
+</div>
+
+<!-- MOCKUP MODAL -->
+<div class="modal-overlay" id="mockupModal">
+  <div class="modal" style="width:660px;max-width:95vw;padding:20px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px"><h3 style="margin:0;font-size:15px">📖 잡지 목업 미리보기</h3><button onclick="closeModal('mockupModal')" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-dim)">×</button></div>
+    <div class="mockup-preview-area" id="mockupContainer"></div>
+    <div style="display:flex;align-items:center;gap:9px;margin-top:11px;padding:9px 11px;background:var(--panel2);border-radius:7px;border:1px solid var(--border)">
+      <span style="font-size:10px;font-weight:600;color:var(--text-dim);flex-shrink:0">배경색</span>
+      <div class="mockup-bg-palette">
+        <div class="mockup-bg-swatch transparent-swatch" onclick="setMockupBg('transparent',this)" title="투명"></div>
+        <div class="mockup-bg-swatch active" style="background:#e8e4de" onclick="setMockupBg('#e8e4de',this)"></div>
+        <div class="mockup-bg-swatch" style="background:#fff" onclick="setMockupBg('#fff',this)"></div>
+        <div class="mockup-bg-swatch" style="background:#5271ff" onclick="setMockupBg('#5271ff',this)"></div>
+        <div class="mockup-bg-swatch" style="background:#f0d6e4" onclick="setMockupBg('#f0d6e4',this)"></div>
+        <div class="mockup-bg-swatch" style="background:#d6f0e0" onclick="setMockupBg('#d6f0e0',this)"></div>
+        <div class="mockup-bg-swatch" style="background:#1a1a2e" onclick="setMockupBg('#1a1a2e',this)"></div>
+        <div class="mockup-bg-swatch" style="background:#111" onclick="setMockupBg('#111',this)"></div>
+        <input type="color" value="#e8e4de" style="width:21px;height:21px;border-radius:50%;border:2px solid var(--border);cursor:pointer;padding:0" oninput="setMockupBg(this.value,null)">
+      </div>
+    </div>
+    <div style="display:flex;gap:6px;margin-top:10px;justify-content:flex-end;align-items:center">
+      <span style="font-size:10px;color:var(--text-dim);margin-right:auto">표지 앞면 목업</span>
+      <button class="btn btn-ghost" onclick="closeModal('mockupModal')">닫기</button>
+      <button class="btn btn-ghost" onclick="saveMockupPng(false)">🖼 배경포함 저장</button>
+      <button class="btn btn-primary" onclick="saveMockupPng(true)">✨ 투명배경 저장</button>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="projectFileInput" accept=".json" style="display:none" onchange="doLoadProject(event)">
+<div class="toast" id="toast"></div>
+
+<script>
+// ── STATE ──
+let layers=[],selectedId=null,layerCounter=0,zoom=1,activeTab='image',draggingLayerId=null;
+let isDragging=false,isResizing=false,dragOffsetX=0,dragOffsetY=0;
+let resizeHandle='',resizeStartX=0,resizeStartY=0,resizeStartW=0,resizeStartH=0,resizeStartLeft=0,resizeStartTop=0;
+let showGuides=false,history=[],historyIdx=-1;
+let _mockupImgSrc=null,_mockupW=0,_mockupH=0;
+const canvas=document.getElementById('magazine-canvas');
+
+// ── HISTORY ──
+function pushHistory(){
+  const snap=JSON.stringify({layers:layers.map(l=>({...l})),bg:canvas.style.background||'#fff',cw:canvas.style.width||'500px',ch:canvas.style.height||'700px'});
+  if(historyIdx<history.length-1)history=history.slice(0,historyIdx+1);
+  history.push(snap);if(history.length>40)history.shift();historyIdx=history.length-1;
+}
+function undo(){
+  if(historyIdx<=0){showToast('더 이상 되돌릴 수 없습니다');return;}
+  historyIdx--;const s=JSON.parse(history[historyIdx]);
+  layers=s.layers;selectedId=null;canvas.style.background=s.bg;canvas.style.width=s.cw;canvas.style.height=s.ch;
+  document.getElementById('canvasW').value=parseInt(s.cw)||500;document.getElementById('canvasH').value=parseInt(s.ch)||700;
+  document.getElementById('bgColor').value=s.bg||'#ffffff';
+  renderLayers();updateEmptyHint();applyZoom();document.getElementById('layerProps').style.display='none';showToast('↩ 되돌렸습니다');
+}
+
+// ── GUIDE ──
+function toggleGuide(){
+  showGuides=!showGuides;document.getElementById('guideBtn').style.color=showGuides?'var(--accent)':'';renderGuides();
+}
+function renderGuides(){
+  const ov=document.getElementById('guideOverlay');if(!ov)return;if(!showGuides){ov.innerHTML='';return;}
+  const w=parseInt(canvas.style.width)||500,h=parseInt(canvas.style.height)||700;
+  ov.innerHTML=`<div class="guide-line h" style="top:${h/2}px"></div><div class="guide-line v" style="left:${w/2}px"></div><div class="guide-line h" style="top:${h/3}px;opacity:.5"></div><div class="guide-line h" style="top:${h*2/3}px;opacity:.5"></div><div class="guide-line v" style="left:${w/3}px;opacity:.5"></div><div class="guide-line v" style="left:${w*2/3}px;opacity:.5"></div>`;
+}
+
+// ── ZOOM ──
+function applyZoom(){
+  const wrap=document.getElementById('canvasWrap'),inner=document.getElementById('canvasScrollInner'),area=document.getElementById('canvasArea');
+  const cw=parseInt(canvas.style.width)||500,ch=parseInt(canvas.style.height)||700;
+  const sw=Math.round(cw*zoom),sh=Math.round(ch*zoom);
+  wrap.style.width=sw+'px';wrap.style.height=sh+'px';
+  canvas.style.width=cw+'px';canvas.style.height=ch+'px';canvas.style.transformOrigin='top left';canvas.style.transform='scale('+zoom+')';
+  const tw=sw+96,th=sh+96,aw=area.clientWidth||600,ah=area.clientHeight||600;
+  if(tw<=aw&&th<=ah){inner.style.minWidth=aw+'px';inner.style.minHeight=ah+'px';inner.style.display='flex';inner.style.alignItems='center';inner.style.justifyContent='center';}
+  else{inner.style.minWidth=tw+'px';inner.style.minHeight=th+'px';inner.style.display='flex';inner.style.alignItems='flex-start';inner.style.justifyContent='flex-start';}
+  document.getElementById('zoomLabel').textContent=Math.round(zoom*100)+'%';
+}
+function adjustZoom(d){zoom=Math.max(.2,Math.min(3,parseFloat((zoom+d).toFixed(2))));applyZoom();}
+function fitZoom(){
+  const a=document.getElementById('canvasArea'),aw=(a.clientWidth||600)-96,ah=(a.clientHeight||600)-96;
+  const cw=parseInt(canvas.style.width)||500,ch=parseInt(canvas.style.height)||700;
+  zoom=Math.max(.2,parseFloat(Math.min(aw/cw,ah/ch,1).toFixed(2)));applyZoom();
+}
+
+// ── CANVAS ──
+function setBgColor(c){
+  pushHistory();
+  canvas.style.background=c;
+  // bgColor hidden input 업데이트 (저장/불러오기용)
+  const inp=document.getElementById('bgColor');
+  if(inp&&!c.includes('gradient'))inp.value=c;
+}
+function setCanvasSize(w,h){w=parseInt(w)||500;h=parseInt(h)||700;pushHistory();canvas.style.width=w+'px';canvas.style.height=h+'px';document.getElementById('canvasW').value=w;document.getElementById('canvasH').value=h;applyZoom();renderGuides();}
+
+// ── MODAL ──
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function showAddLayerType(t){switchTab(t);openModal('newLayerModal');}
+function switchTab(tab){
+  activeTab=tab;
+  const tabs=['image','text','shape','sticker','clip'];
+  document.querySelectorAll('.modal-tab').forEach((t,i)=>t.classList.toggle('active',tabs[i]===tab));
+  document.querySelectorAll('.modal-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  if(tab==='sticker') initStickerGrid('star');
+}
+document.querySelectorAll('.modal-overlay').forEach(ov=>ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');}));
+
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
+
+// ── UPLOAD ──
+function handleImageUpload(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{addImageLayer(ev.target.result,f.name);closeModal('newLayerModal');document.getElementById('imageInput').value='';};r.readAsDataURL(f);}
+const dz=document.getElementById('dropZone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('dragover');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('dragover'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('dragover');const f=e.dataTransfer.files[0];if(!f||!f.type.startsWith('image/'))return;const r=new FileReader();r.onload=ev=>{addImageLayer(ev.target.result,f.name);closeModal('newLayerModal');};r.readAsDataURL(f);});
+
+// ── ADD LAYERS ──
+function addLayer(){
+  if(activeTab==='image'){showToast('이미지를 선택해주세요');return;}
+  if(activeTab==='sticker'){showToast('스티커를 클릭해서 추가하세요');return;}
+  if(activeTab==='clip'){addClipLayer();return;}
+  if(activeTab==='text'){addTextLayer(document.getElementById('textContent').value||'TEXT',document.getElementById('textFont').value,parseInt(document.getElementById('textSize').value)||48,document.getElementById('textColor').value,document.getElementById('textWeight').value,document.getElementById('textStyle').value);closeModal('newLayerModal');}
+  if(activeTab==='shape'){const t=document.getElementById('shapeType').value,c=document.getElementById('shapeColor').value,op=document.getElementById('shapeOpacity').value/100,w=parseInt(document.getElementById('shapeW').value)||200,h=parseInt(document.getElementById('shapeH').value)||200,sw=parseInt(document.getElementById('shapeStroke').value)||2,cv=parseInt(document.getElementById('shapeCurve').value)||50,bw=parseInt(document.getElementById('shapeBorder').value)||0,bc=document.getElementById('shapeBorderColor').value;addShapeLayer(t,c,op,w,h,sw,cv,bw,bc);closeModal('newLayerModal');}
+}
+function mkTextDefaults(){return{textShadow:false,shadowColor:'rgba(0,0,0,.5)',shadowBlur:4,shadowX:2,shadowY:2,textStroke:false,strokeColor:'#000',strokeWidth:1};}
+function mkShapeDefaults(){return{borderWidth:0,borderColor:'#000',gradientEnabled:false,gradientColor:'#fff',gradientAngle:180,strokeWidth:2,curveAmount:50};}
+
+function addImageLayer(src,name){
+  const id='layer_'+(++layerCounter),img=new Image();
+  img.onload=()=>{
+    const ratio=img.naturalWidth/img.naturalHeight,maxW=parseInt(canvas.style.width)||500,maxH=parseInt(canvas.style.height)||700;
+    let w=Math.min(img.naturalWidth,maxW),h=w/ratio;if(h>maxH){h=maxH;w=h*ratio;}
+    pushHistory();layers.push({id,type:'image',name:name||'이미지',src,x:(maxW-w)/2,y:(maxH-h)/2,width:w,height:h,naturalRatio:img.naturalWidth/img.naturalHeight,opacity:1,visible:true,locked:false,blur:0,brightness:100,innerShadow:0});
+    renderLayers();selectLayer(id);updateEmptyHint();showToast('이미지 레이어 추가됨');
+  };img.src=src;
+}
+function addTextLayer(text,font,size,color,weight,style){
+  const id='layer_'+(++layerCounter);
+  pushHistory();layers.push({id,type:'text',name:text.substring(0,18),text,font,size,color,weight:weight||'700',style:style||'normal',x:30,y:30,opacity:1,visible:true,locked:false,letterSpacing:0,...mkTextDefaults()});
+  renderLayers();selectLayer(id);updateEmptyHint();showToast('텍스트 레이어 추가됨');
+}
+function addShapeLayer(type,color,opacity,w,h,stroke,curve,border,borderColor){
+  const id='layer_'+(++layerCounter);
+  const nm={rect:'사각형',circle:'원형',line:'직선','curve-wave':'물결 곡선','curve-arc':'아치 곡선','curve-s':'S자 곡선','curve-diagonal':'대각선 곡선'};
+  const cw=parseInt(canvas.style.width)||500,ch=parseInt(canvas.style.height)||700;
+  pushHistory();layers.push({id,type:'shape',shapeType:type,name:nm[type]||'도형',color,x:(cw-w)/2,y:(ch-h)/2,width:w,height:h,strokeWidth:stroke||2,curveAmount:curve||50,borderWidth:border||0,borderColor:borderColor||'#000',gradientEnabled:false,gradientColor:'#fff',gradientAngle:180,opacity,visible:true,locked:false});
+  renderLayers();selectLayer(id);updateEmptyHint();showToast('도형 레이어 추가됨');
+}
+function onShapeTypeChange(){
+  const t=document.getElementById('shapeType').value,isCurve=t.startsWith('curve-'),isLine=t==='line',cl=isCurve||isLine;
+  document.getElementById('shapeCurveRow').style.display=isCurve?'':'none';
+  document.getElementById('shapeStrokeRow').style.display=cl?'':'none';
+  document.getElementById('shapeHRow').style.display=cl?'none':'';
+  document.getElementById('shapeBorderRow').style.display=cl?'none':'';
+  document.getElementById('shapeBorderColorRow').style.display=cl?'none':'';
+  if(cl){document.getElementById('shapeW').value=300;document.getElementById('shapeH').value=80;}
+  else{document.getElementById('shapeW').value=200;document.getElementById('shapeH').value=200;}
+}
+
+// ── RENDER ──
+function buildCurvePath(st,W,H,ca){
+  if(st==='line')return`M 0 ${H/2} L ${W} ${H/2}`;
+  if(st==='curve-wave')return`M 0 ${H/2} C ${W*.25} ${H/2-ca},${W*.25} ${H/2-ca},${W*.5} ${H/2} S ${W*.75} ${H/2+ca},${W} ${H/2}`;
+  if(st==='curve-arc')return`M 0 ${H*.85} Q ${W/2} ${H*.85-ca*1.2} ${W} ${H*.85}`;
+  if(st==='curve-s')return`M 0 ${H*.2} C ${W*.4} ${H*.2},${W*.6} ${H*.8},${W} ${H*.8}`;
+  if(st==='curve-diagonal')return`M 0 ${H*.9} Q ${W*.5} ${H*.9-ca} ${W} ${H*.1}`;
+  return'';
+}
+function renderLayers(){canvas.querySelectorAll('.canvas-layer').forEach(el=>el.remove());layers.forEach(l=>{if(!l.visible)return;canvas.appendChild(createLayerElement(l));});renderLayerList();}
+function createLayerElement(layer){
+  const el=document.createElement('div');
+  el.className='canvas-layer'+(layer.id===selectedId?' selected':'');
+  el.id='el_'+layer.id;el.style.left=layer.x+'px';el.style.top=layer.y+'px';el.style.opacity=layer.opacity;el.style.zIndex=layers.indexOf(layer);
+  if(layer.type==='image'){
+    el.style.width=layer.width+'px';el.style.height=layer.height+'px';el.style.overflow='hidden';
+    const img=document.createElement('img');img.src=layer.src;img.style.cssText='width:100%;height:100%;display:block;object-fit:contain';img.draggable=false;
+    const fp=[];if(layer.blur>0)fp.push(`blur(${layer.blur}px)`);if((layer.brightness||100)!==100)fp.push(`brightness(${layer.brightness}%)`);if(fp.length)img.style.filter=fp.join(' ');
+    el.appendChild(img);
+    if(layer.innerShadow>0){const sh=document.createElement('div');sh.style.cssText=`position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 ${layer.innerShadow*3}px ${layer.innerShadow}px rgba(0,0,0,${Math.min(layer.innerShadow/80,.95)})`;el.appendChild(sh);}
+  }else if(layer.type==='text'){
+    el.classList.add('text-layer');
+    el.style.fontFamily=layer.font;el.style.fontSize=layer.size+'px';
+    el.style.fontWeight=layer.weight||'700';el.style.fontStyle=layer.style||'normal';
+    el.style.letterSpacing=(layer.letterSpacing||0)+'px';el.style.lineHeight='1.15';el.style.whiteSpace='pre-wrap';
+    // 그라디언트 텍스트 지원
+    if(layer.color&&layer.color.includes('gradient')){
+      el.style.backgroundImage=layer.color;
+      el.style.webkitBackgroundClip='text';
+      el.style.webkitTextFillColor='transparent';
+      el.style.color='';
+    } else {
+      el.style.backgroundImage='';
+      el.style.webkitBackgroundClip='';
+      el.style.webkitTextFillColor='';
+      el.style.color=layer.color;
+    }
+    if(layer.textShadow)el.style.textShadow=`${layer.shadowX||2}px ${layer.shadowY||2}px ${layer.shadowBlur||4}px ${layer.shadowColor||'rgba(0,0,0,.5)'}`;
+    if(layer.textStroke)el.style.webkitTextStroke=`${layer.strokeWidth||1}px ${layer.strokeColor||'#000'}`;
+    el.textContent=layer.text;
+  }else if(layer.type==='shape'){
+    const isCurve=layer.shapeType&&layer.shapeType.startsWith('curve-'),isLine=layer.shapeType==='line';
+    if(isCurve||isLine){
+      const W=layer.width||300,H=layer.height||80;el.style.width=W+'px';el.style.height=H+'px';el.style.overflow='visible';
+      const svgNS='http://www.w3.org/2000/svg',svg=document.createElementNS(svgNS,'svg');
+      svg.setAttribute('width',W);svg.setAttribute('height',H);svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.style.cssText='overflow:visible;display:block';
+      const path=document.createElementNS(svgNS,'path');path.setAttribute('d',buildCurvePath(layer.shapeType,W,H,layer.curveAmount||50));path.setAttribute('fill','none');path.setAttribute('stroke',layer.color);path.setAttribute('stroke-width',layer.strokeWidth||2);path.setAttribute('stroke-linecap','round');
+      svg.appendChild(path);el.appendChild(svg);
+    }else{
+      el.style.width=layer.width+'px';el.style.height=layer.height+'px';
+      if(layer.gradientEnabled)el.style.background=`linear-gradient(${layer.gradientAngle||180}deg,${layer.color},${layer.gradientColor||'#fff'})`;
+      else el.style.background=layer.color;
+      if(layer.shapeType==='circle')el.style.borderRadius='50%';
+      if((layer.borderWidth||0)>0)el.style.border=`${layer.borderWidth}px solid ${layer.borderColor||'#000'}`;
+    }
+  }
+  if(layer.id===selectedId&&!layer.locked&&layer.type!=='text'){
+    ['tl','tr','bl','br'].forEach(pos=>{const h=document.createElement('div');h.className='resize-handle '+pos;h.addEventListener('mousedown',e=>startResize(e,layer.id,pos));el.appendChild(h);});
+  }
+  // ── STICKER
+  if(layer.type==='sticker'){
+    el.style.width=layer.width+'px'; el.style.height=layer.height+'px';
+    el.style.overflow='visible';
+    const wrap=document.createElement('div');
+    wrap.style.cssText=`width:100%;height:100%;display:flex;align-items:center;justify-content:center`;
+    wrap.innerHTML=layer.svgData.replace(/currentColor/g, layer.color||'#b07d3a')
+      .replace(/width="[^"]*"/, `width="${layer.width}"`)
+      .replace(/height="[^"]*"/, `height="${layer.height}"`);
+    el.appendChild(wrap);
+  }
+  // ── CLIP MASK
+  if(layer.type==='clip'){
+    el.style.width=layer.width+'px'; el.style.height=layer.height+'px';
+    el.style.overflow='hidden';
+    const clipId='clip_'+layer.id;
+    const svgNS='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(svgNS,'svg');
+    svg.setAttribute('width',layer.width); svg.setAttribute('height',layer.height);
+    svg.style.cssText='position:absolute;inset:0;width:100%;height:100%;overflow:hidden';
+    // clipPath 정의
+    const defs=document.createElementNS(svgNS,'defs');
+    const cp=document.createElementNS(svgNS,'clipPath');
+    cp.id=clipId;
+    const W=layer.width, H=layer.height;
+    const maskEl=buildClipPathEl(layer.clipShape||'circle', W, H, svgNS);
+    cp.appendChild(maskEl);
+    defs.appendChild(cp);
+    svg.appendChild(defs);
+    // 이미지
+    const img=document.createElementNS(svgNS,'image');
+    img.setAttribute('href',layer.src);
+    img.setAttribute('x','0'); img.setAttribute('y','0');
+    img.setAttribute('width',W); img.setAttribute('height',H);
+    img.setAttribute('preserveAspectRatio','xMidYMid slice');
+    img.setAttribute('clip-path',`url(#${clipId})`);
+    svg.appendChild(img);
+    el.appendChild(svg);
+  }
+
+  el.addEventListener('mousedown',e=>{
+    if(e.target.classList.contains('resize-handle'))return;
+    if(layer.locked){showToast('🔒 잠금된 레이어입니다');return;}
+    selectLayer(layer.id);
+    startDrag(e,layer.id);
+  });
+
+  return el;
+}
+
+// ── INLINE EDIT ──
+
+
+// ── LAYER LIST ──
+function renderLayerList(){
+  const list=document.getElementById('layerList');
+  if(layers.length===0){list.innerHTML='<div class="no-layer-msg">레이어를 추가해보세요<br>드래그로 순서 변경 가능</div>';return;}
+  list.innerHTML='';
+  [...layers].reverse().forEach((layer,ri)=>{
+    const realIdx=layers.length-1-ri,item=document.createElement('div');
+    item.className='layer-item'+(layer.id===selectedId?' selected':'');item.dataset.id=layer.id;item.draggable=true;
+    const icon={image:'🖼',text:'✏️',shape:'▭'}[layer.type]||'◻';
+    item.innerHTML=`<span class="layer-drag-handle">⠿</span><div class="layer-thumb">${layer.type==='image'?`<img src="${layer.src}">`:`<span style="font-size:12px">${icon}</span>`}</div><div class="layer-info"><div class="layer-name">${layer.name}</div><div class="layer-type">${layer.locked?'🔒 ':''} ${layer.type}</div></div><div class="layer-controls"><button class="layer-btn ${layer.visible?'active':''}" onclick="toggleVisibility('${layer.id}')" title="표시/숨김">👁</button><button class="layer-btn ${layer.locked?'active':''}" onclick="toggleLock('${layer.id}')" title="잠금">🔒</button><button class="layer-btn" onclick="duplicateLayer('${layer.id}')" title="복제">⧉</button><button class="layer-btn" onclick="moveLayerUp('${layer.id}')" title="위로">↑</button><button class="layer-btn" onclick="moveLayerDown('${layer.id}')" title="아래로">↓</button><button class="layer-btn" onclick="deleteLayer('${layer.id}')" title="삭제" style="color:var(--accent2)">✕</button></div>`;
+    item.addEventListener('click',e=>{if(e.target.closest('.layer-controls'))return;selectLayer(layer.id);});
+    item.addEventListener('dragstart',e=>{draggingLayerId=layer.id;setTimeout(()=>item.classList.add('dragging'),0);e.dataTransfer.effectAllowed='move';});
+    item.addEventListener('dragend',()=>{item.classList.remove('dragging');document.querySelectorAll('.layer-item').forEach(i=>i.classList.remove('drag-over'));});
+    item.addEventListener('dragover',e=>{e.preventDefault();document.querySelectorAll('.layer-item').forEach(i=>i.classList.remove('drag-over'));item.classList.add('drag-over');});
+    item.addEventListener('drop',e=>{e.preventDefault();if(draggingLayerId&&draggingLayerId!==layer.id){const from=layers.findIndex(l=>l.id===draggingLayerId),moved=layers.splice(from,1)[0];layers.splice(realIdx,0,moved);pushHistory();renderLayers();showToast('레이어 순서 변경됨');}});
+    list.appendChild(item);
+  });
+}
+
+// ── SELECT / OPS ──
+function selectLayer(id){selectedId=id;renderLayers();showLayerProps(id);}
+function toggleVisibility(id){const l=layers.find(l=>l.id===id);if(l){l.visible=!l.visible;pushHistory();renderLayers();}}
+function toggleLock(id){const l=layers.find(l=>l.id===id);if(l){l.locked=!l.locked;renderLayers();showToast(l.locked?'🔒 잠금됨':'🔓 잠금 해제');}}
+function moveLayerUp(id){const i=layers.findIndex(l=>l.id===id);if(i<layers.length-1){pushHistory();[layers[i],layers[i+1]]=[layers[i+1],layers[i]];renderLayers();}}
+function moveLayerDown(id){const i=layers.findIndex(l=>l.id===id);if(i>0){pushHistory();[layers[i],layers[i-1]]=[layers[i-1],layers[i]];renderLayers();}}
+function deleteLayer(id){pushHistory();layers=layers.filter(l=>l.id!==id);if(selectedId===id){selectedId=null;document.getElementById('layerProps').style.display='none';}renderLayers();updateEmptyHint();showToast('레이어 삭제됨');}
+function duplicateLayer(id){const src=layers.find(l=>l.id===id);if(!src)return;const nid='layer_'+(++layerCounter);pushHistory();layers.push({...src,id:nid,name:src.name+' 복사',x:src.x+14,y:src.y+14});renderLayers();selectLayer(nid);showToast('⧉ 복제됨');}
+
+// ── PROPS PANEL ──
+function showLayerProps(id){
+  const layer=layers.find(l=>l.id===id),sec=document.getElementById('layerProps'),cont=document.getElementById('layerPropsContent');
+  if(!layer){sec.style.display='none';return;}sec.style.display='block';
+  const isCurve=layer.type==='shape'&&layer.shapeType&&layer.shapeType.startsWith('curve-');
+  const isLine=layer.type==='shape'&&layer.shapeType==='line';
+  const nm={rect:'사각형',circle:'원형',line:'직선','curve-wave':'물결 곡선','curve-arc':'아치 곡선','curve-s':'S자 곡선','curve-diagonal':'대각선 곡선'};
+  // ── sticker / clip: h 선언 이후에 처리
+  if(layer.type==='sticker'){
+    cont.innerHTML=`
+      <div class="prop-section-title">✦ 스티커 설정</div>
+      <div class="prop-row"><span class="prop-label">이름</span><input class="prop-input" value="${layer.name}" onchange="updateLayerProp('${id}','name',this.value)"></div>
+      <div class="prop-row"><span class="prop-label">X</span><input type="number" class="prop-input" value="${Math.round(layer.x)}" onchange="updateLayerProp('${id}','x',+this.value)"></div>
+      <div class="prop-row"><span class="prop-label">Y</span><input type="number" class="prop-input" value="${Math.round(layer.y)}" onchange="updateLayerProp('${id}','y',+this.value)"></div>
+      <div class="prop-row"><span class="prop-label">크기</span><input type="number" class="prop-input" value="${Math.round(layer.width)}" onchange="updateLayerProp('${id}','width',+this.value);updateLayerProp('${id}','height',+this.value)"></div>
+      <div class="prop-row"><span class="prop-label">투명도</span><input type="range" class="prop-input" min="0" max="1" step=".01" value="${layer.opacity}" oninput="updateLayerPropLive('${id}','opacity',+this.value)"></div>
+      <div class="prop-row" style="flex-direction:column;align-items:stretch;gap:3px;margin-top:6px">
+        <span class="prop-label" style="width:auto;margin-bottom:4px">색상</span>
+        <div id="st_gp_${id}"></div>
+      </div>
+      <div style="margin-top:10px;display:flex;gap:4px">
+        <button class="btn btn-ghost" style="flex:1;font-size:10px" onclick="moveLayerUp('${id}')">↑ 위로</button>
+        <button class="btn btn-ghost" style="flex:1;font-size:10px" onclick="duplicateLayer('${id}')">⧉ 복제</button>
+        <button class="btn btn-ghost" style="flex:1;font-size:10px" onclick="moveLayerDown('${id}')">↓ 아래로</button>
+      </div>
+      <div style="margin-top:4px"><button class="btn btn-danger" style="width:100%;font-size:10px" onclick="deleteLayer('${id}')">레이어 삭제</button></div>
+    `;
+    setTimeout(()=>{
+      initGradPicker('st_gp_'+id, layer.color||'#b07d3a', val=>{
+        layer.color=val;
+        const el2=document.getElementById('el_'+id);
+        if(el2){const wrap=el2.querySelector('div');if(wrap)wrap.innerHTML=layer.svgData.replace(/currentColor/g,val.includes('gradient')?'#b07d3a':val);}
+      });
+    },0);
+    return;
+  }
+
+  if(layer.type==='clip'){
+    const shapeNames={rect:'사각형',circle:'원형',rounded:'둥근 사각형',diamond:'마름모',hexagon:'육각형',triangle:'삼각형',star5:'별',ellipse:'타원'};
+    // SVG 미리보기 생성
+    const W=80,H=80,svgNS='http://www.w3.org/2000/svg';
+    const previewSvg=document.createElementNS(svgNS,'svg');
+    previewSvg.setAttribute('width',W);previewSvg.setAttribute('height',H);previewSvg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    const previewDefs=document.createElementNS(svgNS,'defs');
+    const previewCp=document.createElementNS(svgNS,'clipPath');
+    previewCp.id='prev_cp_'+id;
+    previewCp.appendChild(buildClipPathEl(layer.clipShape||'circle',W,H,svgNS));
+    previewDefs.appendChild(previewCp);previewSvg.appendChild(previewDefs);
+    const previewImg=document.createElementNS(svgNS,'image');
+    previewImg.setAttribute('href',layer.src);previewImg.setAttribute('x','0');previewImg.setAttribute('y','0');
+    previewImg.setAttribute('width',W);previewImg.setAttribute('height',H);
+    previewImg.setAttribute('preserveAspectRatio','xMidYMid slice');
+    previewImg.setAttribute('clip-path',`url(#prev_cp_${id})`);
+    previewSvg.appendChild(previewImg);
+    // 모양 외곽선
+    const outline=buildClipPathEl(layer.clipShape||'circle',W,H,svgNS);
+    outline.setAttribute('fill','none');outline.setAttribute('stroke','#b07d3a');outline.setAttribute('stroke-width','1.5');outline.setAttribute('stroke-dasharray','4 2');
+    previewSvg.appendChild(outline);
+
+    cont.innerHTML=`
+      <div class="prop-section-title">⬡ 클리핑 마스크</div>
+      <div style="display:flex;justify-content:center;margin:8px 0;background:var(--panel2);border-radius:8px;padding:10px;border:1px solid var(--border)" id="clip_preview_${id}"></div>
+      <div class="prop-row"><span class="prop-label">이름</span><input class="prop-input" value="${layer.name}" onchange="updateLayerProp('${id}','name',this.value)"></div>
+      <div class="prop-row"><span class="prop-label">모양</span>
+        <select class="prop-input" onchange="updateLayerProp('${id}','clipShape',this.value)">
+          ${Object.entries(shapeNames).map(([v,n])=>`<option value="${v}" ${layer.clipShape===v?'selected':''}>${n}</option>`).join('')}
+        </select>
+      </div>
+      <div class="prop-row"><span class="prop-label">X</span><input type="number" class="prop-input" value="${Math.round(layer.x)}" onchange="updateLayerProp('${id}','x',+this.value)"></div>
+      <div class="prop-row"><span class="prop-label">Y</span><input type="number" class="prop-input" value="${Math.round(layer.y)}" onchange="updateLayerProp('${id}','y',+this.value)"></div>
+      <div class="prop-row"><span class="prop-label">너비</span><input type="number" class="prop-input" value="${Math.round(layer.width)}" onchange="resizeProp('${id}','width',+this.value)"></div>
+      <div class="prop-row"><span class="prop-label">높이</span><input type="number" class="prop-input" value="${Math.round(layer.height)}" onchange="resizeProp('${id}','height',+this.value)"></div>
+      <div class="prop-row"><span class="prop-label">투명도</span><input type="range" class="prop-input" min="0" max="1" step=".01" value="${layer.opacity}" oninput="updateLayerPropLive('${id}','opacity',+this.value)"></div>
+      <div style="margin-top:10px;display:flex;gap:4px">
+        <button class="btn btn-ghost" style="flex:1;font-size:10px" onclick="moveLayerUp('${id}')">↑ 위로</button>
+        <button class="btn btn-ghost" style="flex:1;font-size:10px" onclick="duplicateLayer('${id}')">⧉ 복제</button>
+        <button class="btn btn-ghost" style="flex:1;font-size:10px" onclick="moveLayerDown('${id}')">↓ 아래로</button>
+      </div>
+      <div style="margin-top:4px"><button class="btn btn-danger" style="width:100%;font-size:10px" onclick="deleteLayer('${id}')">레이어 삭제</button></div>
+    `;
+    // 미리보기 SVG 삽입
+    const previewBox=document.getElementById('clip_preview_'+id);
+    if(previewBox) previewBox.appendChild(previewSvg);
+    return;
+  }
+
+  let h=`<div class="prop-row"><span class="prop-label">이름</span><input class="prop-input" value="${layer.name.replace(/"/g,'&quot;')}" onchange="updateLayerProp('${id}','name',this.value)"></div>
+  <div class="prop-row"><span class="prop-label">X</span><input type="number" class="prop-input" value="${Math.round(layer.x)}" onchange="updateLayerProp('${id}','x',+this.value)"></div>
+  <div class="prop-row"><span class="prop-label">Y</span><input type="number" class="prop-input" value="${Math.round(layer.y)}" onchange="updateLayerProp('${id}','y',+this.value)"></div>
+  <div class="prop-row"><span class="prop-label">투명도</span><input type="range" class="prop-input" min="0" max="1" step=".01" value="${layer.opacity}" oninput="updateLayerPropLive('${id}','opacity',+this.value)"></div>`;
+  if(layer.type==='image'||layer.type==='shape'&&!isCurve&&!isLine)
+    h+=`<div class="prop-row"><span class="prop-label">너비</span><input type="number" class="prop-input" value="${Math.round(layer.width)}" onchange="resizeProp('${id}','width',+this.value)"></div><div class="prop-row"><span class="prop-label">높이</span><input type="number" class="prop-input" value="${Math.round(layer.height)}" onchange="resizeProp('${id}','height',+this.value)"></div>`;
+  if(layer.type==='image'){
+    h+=`<div style="margin:8px 0 5px;border-top:1px solid var(--border);padding-top:8px"><div class="prop-section-title">🎨 이미지 효과</div>
+    <div class="prop-row"><span class="prop-label">블러</span><div style="flex:1;display:flex;gap:5px;align-items:center"><input type="range" class="prop-input" style="flex:1" min="0" max="30" step=".5" value="${layer.blur||0}" oninput="updateLayerPropLive('${id}','blur',+this.value);document.getElementById('blv${id}').textContent=this.value+'px'"><span id="blv${id}" style="font-size:10px;color:var(--text-dim);width:28px;text-align:right">${layer.blur||0}px</span></div></div>
+    <div class="prop-row"><span class="prop-label">밝기</span><div style="flex:1;display:flex;gap:5px;align-items:center"><input type="range" class="prop-input" style="flex:1" min="0" max="200" value="${layer.brightness!==undefined?layer.brightness:100}" oninput="updateLayerPropLive('${id}','brightness',+this.value);document.getElementById('brv${id}').textContent=this.value+'%'"><span id="brv${id}" style="font-size:10px;color:var(--text-dim);width:28px;text-align:right">${layer.brightness!==undefined?layer.brightness:100}%</span></div></div>
+    <div style="display:flex;gap:4px;margin-bottom:8px"><button class="size-preset" style="font-size:9px;padding:3px 5px" onclick="updateLayerPropLive('${id}','brightness',100);showLayerProps('${id}')">기본</button><button class="size-preset" style="font-size:9px;padding:3px 5px" onclick="updateLayerPropLive('${id}','brightness',60);showLayerProps('${id}')">어둡게</button><button class="size-preset" style="font-size:9px;padding:3px 5px" onclick="updateLayerPropLive('${id}','brightness',30);showLayerProps('${id}')">더 어둡게</button></div>
+    <div class="prop-row"><span class="prop-label">내부그림자</span><div style="flex:1;display:flex;gap:5px;align-items:center"><input type="range" class="prop-input" style="flex:1" min="0" max="80" value="${layer.innerShadow||0}" oninput="updateLayerPropLive('${id}','innerShadow',+this.value);document.getElementById('isv${id}').textContent=this.value"><span id="isv${id}" style="font-size:10px;color:var(--text-dim);width:22px;text-align:right">${layer.innerShadow||0}</span></div></div>
+    <button class="btn btn-ghost" style="width:100%;font-size:10px;margin-top:3px" onclick="resetImgEffects('${id}')">효과 초기화</button></div>`;
+  }
+  if(layer.type==='text'){
+    h+=`<div style="margin:8px 0 5px;border-top:1px solid var(--border);padding-top:8px"><div class="prop-section-title">📝 텍스트</div>
+    <div class="prop-row" style="flex-direction:column;align-items:stretch;gap:4px">
+    <span class="prop-label" style="width:auto;margin-bottom:2px">내용 <span style="font-size:9px;color:var(--text-dim);font-weight:400">— 오른쪽 패널에서 직접 수정하세요</span></span>
+    <textarea class="text-input-area" style="font-size:11px;min-height:70px" oninput="liveTextEdit('${id}',this.value)" onchange="updateLayerProp('${id}','text',this.value)">${layer.text}</textarea>
+    </div>
+    <div class="prop-row"><span class="prop-label">폰트</span><select class="prop-input" onchange="updateLayerProp('${id}','font',this.value)">${[["'Playfair Display', serif","Playfair Display"],["'Cormorant Garamond', serif","Cormorant"],["'Montserrat', sans-serif","Montserrat"],["'Nanum Myeongjo', serif","나눔명조"],["Georgia, serif","Georgia"],["Arial, sans-serif","Arial"]].map(([v,n])=>`<option value="${v}" ${layer.font===v?'selected':''}>${n}</option>`).join('')}</select></div>
+    <div class="prop-row"><span class="prop-label">크기</span><input type="number" class="prop-input" value="${layer.size}" min="6" max="300" onchange="updateLayerProp('${id}','size',+this.value)"></div>
+    <div class="prop-row" style="flex-direction:column;align-items:stretch;gap:3px"><span class="prop-label" style="width:auto">색상</span><div id="tc_gp_${id}"></div></div>
+    <div class="prop-row"><span class="prop-label">굵기</span><select class="prop-input" onchange="updateLayerProp('${id}','weight',this.value)">${[['300','Light'],['400','Regular'],['700','Bold'],['900','Black']].map(([v,n])=>`<option value="${v}" ${layer.weight==v?'selected':''}>${n}</option>`).join('')}</select></div>
+    <div class="prop-row"><span class="prop-label">스타일</span><select class="prop-input" onchange="updateLayerProp('${id}','style',this.value)"><option value="normal" ${layer.style==='normal'?'selected':''}>Normal</option><option value="italic" ${layer.style==='italic'?'selected':''}>Italic</option></select></div>
+    <div class="prop-row"><span class="prop-label">자간</span><input type="number" class="prop-input" value="${layer.letterSpacing||0}" onchange="updateLayerProp('${id}','letterSpacing',+this.value)"></div>
+    </div>
+    <div style="margin:5px 0;border-top:1px solid var(--border);padding-top:8px"><div class="prop-section-title">✨ 텍스트 효과</div>
+    <div class="prop-row"><span class="prop-label">그림자</span><label style="display:flex;align-items:center;gap:5px;font-size:11px;cursor:pointer"><input type="checkbox" ${layer.textShadow?'checked':''} onchange="updateLayerProp('${id}','textShadow',this.checked)"> 사용</label></div>
+    ${layer.textShadow?`<div class="prop-row"><span class="prop-label">그림자색</span><input type="color" class="prop-input" value="${layer.shadowColor||'#000000'}" onchange="updateLayerProp('${id}','shadowColor',this.value)"></div><div class="prop-row"><span class="prop-label">번짐</span><input type="number" class="prop-input" value="${layer.shadowBlur||4}" min="0" max="30" onchange="updateLayerProp('${id}','shadowBlur',+this.value)"></div><div class="prop-row"><span class="prop-label">X / Y</span><div style="flex:1;display:flex;gap:4px"><input type="number" class="prop-input" value="${layer.shadowX||2}" onchange="updateLayerProp('${id}','shadowX',+this.value)"><input type="number" class="prop-input" value="${layer.shadowY||2}" onchange="updateLayerProp('${id}','shadowY',+this.value)"></div></div>`:''}
+    <div class="prop-row" style="margin-top:6px"><span class="prop-label">외곽선</span><label style="display:flex;align-items:center;gap:5px;font-size:11px;cursor:pointer"><input type="checkbox" ${layer.textStroke?'checked':''} onchange="updateLayerProp('${id}','textStroke',this.checked)"> 사용</label></div>
+    ${layer.textStroke?`<div class="prop-row"><span class="prop-label">외곽색</span><input type="color" class="prop-input" value="${layer.strokeColor||'#000000'}" onchange="updateLayerProp('${id}','strokeColor',this.value)"></div><div class="prop-row"><span class="prop-label">두께</span><input type="number" class="prop-input" value="${layer.strokeWidth||1}" min="1" max="10" onchange="updateLayerProp('${id}','strokeWidth',+this.value)"></div>`:''}
+    </div>`;
+  }
+  if(layer.type==='shape'){
+    h+=`<div style="margin:8px 0 5px;border-top:1px solid var(--border);padding-top:8px"><div class="prop-section-title">▭ 도형 설정</div>
+    <div class="prop-row"><span class="prop-label">모양</span><select class="prop-input" onchange="updateLayerProp('${id}','shapeType',this.value)">${Object.entries(nm).map(([v,n])=>`<option value="${v}" ${layer.shapeType===v?'selected':''}>${n}</option>`).join('')}</select></div>
+    <div class="prop-row" style="flex-direction:column;align-items:stretch;gap:3px"><span class="prop-label" style="width:auto">색상</span><div id="sc_gp_${id}"></div></div>
+    ${isCurve||isLine?`<div class="prop-row"><span class="prop-label">두께</span><input type="number" class="prop-input" min="1" max="30" value="${layer.strokeWidth||2}" onchange="updateLayerProp('${id}','strokeWidth',+this.value)"></div>`:''}
+    ${isCurve?`<div class="prop-row"><span class="prop-label">곡률</span><div style="flex:1;display:flex;gap:5px;align-items:center"><input type="range" class="prop-input" style="flex:1" min="5" max="150" value="${layer.curveAmount||50}" oninput="updateLayerPropLive('${id}','curveAmount',+this.value);document.getElementById('cv${id}').textContent=this.value"><span id="cv${id}" style="font-size:10px;color:var(--text-dim);width:22px;text-align:right">${layer.curveAmount||50}</span></div></div>`:''}
+    ${!isCurve&&!isLine?`<div class="prop-row"><span class="prop-label">테두리</span><input type="number" class="prop-input" min="0" max="20" value="${layer.borderWidth||0}" onchange="updateLayerProp('${id}','borderWidth',+this.value)"></div><div class="prop-row"><span class="prop-label">테두리색</span><input type="color" class="prop-input" value="${layer.borderColor||'#000000'}" onchange="updateLayerProp('${id}','borderColor',this.value)"></div>
+    `:''}
+    </div>`;
+  }
+  h+=`<div style="margin-top:8px;display:flex;gap:4px"><button class="btn btn-ghost" style="flex:1;font-size:10px" onclick="moveLayerUp('${id}')">↑ 위로</button><button class="btn btn-ghost" style="flex:1;font-size:10px" onclick="duplicateLayer('${id}')">⧉ 복제</button><button class="btn btn-ghost" style="flex:1;font-size:10px" onclick="moveLayerDown('${id}')">↓ 아래로</button></div><div style="margin-top:4px"><button class="btn btn-danger" style="width:100%;font-size:10px" onclick="deleteLayer('${id}')">레이어 삭제</button></div>`;
+  cont.innerHTML=h;
+  // 그라디언트 피커 초기화 (innerHTML 직후)
+  setTimeout(()=>{
+    if(layer.type==='text'){
+      initGradPicker('tc_gp_'+id, layer.color||'#ffffff', val=>{
+        layer.color=val;
+        const el=document.getElementById('el_'+id); if(!el)return;
+        if(val.includes('gradient')){
+          el.style.backgroundImage=val;el.style.webkitBackgroundClip='text';
+          el.style.webkitTextFillColor='transparent';el.style.color='';
+        } else {
+          el.style.backgroundImage='';el.style.webkitBackgroundClip='';
+          el.style.webkitTextFillColor='';el.style.color=val;
+        }
+      });
+    }
+    if(layer.type==='shape'){
+      initGradPicker('sc_gp_'+id, layer.color||'#c9a96e', val=>{
+        layer.color=val;
+        const el=document.getElementById('el_'+id); if(!el)return;
+        const isCv=layer.shapeType&&layer.shapeType.startsWith('curve-');
+        if(isCv||layer.shapeType==='line'){
+          const path=el.querySelector('path');
+          if(path&&!val.includes('gradient'))path.setAttribute('stroke',val);
+        } else { el.style.background=val; }
+      });
+    }
+    // 캔버스 배경 피커 (항상)
+    const bgEl=document.getElementById('bgGradPicker');
+    if(bgEl&&bgEl.childElementCount===0){
+      initGradPicker('bgGradPicker', canvas.style.background||'#ffffff', val=>{setBgColor(val);});
+    }
+  }, 0);
+}
+function updateLayerProp(id,prop,val){const l=layers.find(l=>l.id===id);if(!l)return;pushHistory();l[prop]=val;renderLayers();showLayerProps(id);}
+function liveTextEdit(id,val){
+  const l=layers.find(l=>l.id===id);if(!l)return;
+  l.text=val;
+  l.name=val.replace(/\n/g,' ').trim().substring(0,18)||'텍스트';
+  // DOM 직접 수정 (renderLayers 호출 없이)
+  const el=document.getElementById('el_'+id);
+  if(el)el.textContent=val;
+}
+function updateLayerPropLive(id,prop,val){
+  const l=layers.find(l=>l.id===id);if(!l)return;l[prop]=val;
+  const el=document.getElementById('el_'+id);if(!el)return;
+  el.style.opacity=l.opacity;
+  if(l.type==='image'){
+    const img=el.querySelector('img');if(img){const fp=[];if(l.blur>0)fp.push(`blur(${l.blur}px)`);if((l.brightness||100)!==100)fp.push(`brightness(${l.brightness}%)`);img.style.filter=fp.join(' ')||'';}
+    const ish=el.querySelector('.ish');
+    if(l.innerShadow>0){const sh=ish||document.createElement('div');sh.className='ish';sh.style.cssText=`position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 ${l.innerShadow*3}px ${l.innerShadow}px rgba(0,0,0,${Math.min(l.innerShadow/80,.95)})`;if(!ish)el.appendChild(sh);}else if(ish)ish.remove();
+  }
+  if(l.type==='shape'&&(l.shapeType==='line'||l.shapeType&&l.shapeType.startsWith('curve-'))){
+    const path=el.querySelector('path');if(path){path.setAttribute('d',buildCurvePath(l.shapeType,l.width||300,l.height||80,l.curveAmount||50));if(prop==='strokeWidth')path.setAttribute('stroke-width',val);if(prop==='color')path.setAttribute('stroke',val);}
+  }
+}
+function resizeProp(id,prop,val){const l=layers.find(l=>l.id===id);if(!l)return;if(l.type==='image'&&l.naturalRatio){if(prop==='width'){l.width=val;l.height=val/l.naturalRatio;}else{l.height=val;l.width=val*l.naturalRatio;}}else l[prop]=val;pushHistory();renderLayers();showLayerProps(id);}
+function resetImgEffects(id){const l=layers.find(l=>l.id===id);if(!l)return;pushHistory();l.blur=0;l.brightness=100;l.innerShadow=0;renderLayers();showLayerProps(id);showToast('효과 초기화됨');}
+
+// ── DRAG ──
+function startDrag(e,id){
+    const l=layers.find(l=>l.id===id);if(!l)return;isDragging=true;
+  const r=canvas.getBoundingClientRect();dragOffsetX=(e.clientX-r.left)/zoom-l.x;dragOffsetY=(e.clientY-r.top)/zoom-l.y;
+  const mv=e2=>{if(!isDragging)return;const r2=canvas.getBoundingClientRect();l.x=(e2.clientX-r2.left)/zoom-dragOffsetX;l.y=(e2.clientY-r2.top)/zoom-dragOffsetY;const el=document.getElementById('el_'+id);if(el){el.style.left=l.x+'px';el.style.top=l.y+'px';}if(selectedId===id)showLayerProps(id);};
+  const up=()=>{isDragging=false;pushHistory();document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);};
+  document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up);
+}
+function startResize(e,id,handle){
+  e.preventDefault();e.stopPropagation();const l=layers.find(l=>l.id===id);if(!l)return;
+  isResizing=true;resizeHandle=handle;resizeStartX=e.clientX;resizeStartY=e.clientY;resizeStartW=l.width||0;resizeStartH=l.height||0;resizeStartLeft=l.x;resizeStartTop=l.y;
+  const isImg=l.type==='image',ratio=isImg?resizeStartW/resizeStartH:null;
+  const mv=e2=>{
+    const dx=(e2.clientX-resizeStartX)/zoom,dy=(e2.clientY-resizeStartY)/zoom;let nw,nh;
+    if(handle==='br'){nw=Math.max(20,resizeStartW+dx);nh=isImg?nw/ratio:Math.max(20,resizeStartH+dy);}
+    else if(handle==='bl'){nw=Math.max(20,resizeStartW-dx);nh=isImg?nw/ratio:Math.max(20,resizeStartH+dy);l.x=resizeStartLeft+(resizeStartW-nw);}
+    else if(handle==='tr'){nw=Math.max(20,resizeStartW+dx);nh=isImg?nw/ratio:Math.max(20,resizeStartH-dy);l.y=resizeStartTop+(resizeStartH-nh);}
+    else{nw=Math.max(20,resizeStartW-dx);nh=isImg?nw/ratio:Math.max(20,resizeStartH-dy);l.x=resizeStartLeft+(resizeStartW-nw);l.y=resizeStartTop+(resizeStartH-nh);}
+    l.width=nw;l.height=nh;const el=document.getElementById('el_'+id);if(el){el.style.left=l.x+'px';el.style.top=l.y+'px';el.style.width=nw+'px';el.style.height=nh+'px';}if(selectedId===id)showLayerProps(id);
+  };
+  const up=()=>{isResizing=false;pushHistory();document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);};
+  document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up);
+}
+
+function updateEmptyHint(){const h=document.getElementById('emptyHint');if(h)h.style.display=layers.length===0?'block':'none';}
+function clearCanvas(){if(layers.length===0)return;if(!confirm('모든 레이어를 삭제할까요?'))return;pushHistory();layers=[];selectedId=null;document.getElementById('layerProps').style.display='none';renderLayers();updateEmptyHint();showToast('캔버스 초기화됨');}
+canvas.addEventListener('click',e=>{if(e.target===canvas||e.target===document.getElementById('guideOverlay')){selectedId=null;renderLayers();document.getElementById('layerProps').style.display='none';}});
+
+// ── KEYBOARD ──
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='z'){e.preventDefault();undo();return;}
+  if((e.ctrlKey||e.metaKey)&&e.key==='d'&&selectedId){e.preventDefault();duplicateLayer(selectedId);return;}
+  if(!selectedId)return;if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;
+  const l=layers.find(l=>l.id===selectedId);if(!l||l.locked)return;
+  const step=e.shiftKey?10:1;
+  if(e.key==='ArrowLeft')l.x-=step;else if(e.key==='ArrowRight')l.x+=step;else if(e.key==='ArrowUp')l.y-=step;else if(e.key==='ArrowDown')l.y+=step;
+  else if(e.key==='Delete'||e.key==='Backspace'){deleteLayer(selectedId);return;}else return;
+  e.preventDefault();renderLayers();showLayerProps(selectedId);
+});
+
+// ── EXPORT ──
+function openExportModal(){openModal('exportModal');}
+function doExport(){
+  const prev=selectedId;selectedId=null;renderLayers();
+  const scale=parseInt(document.getElementById('exportScale').value)||2;
+  const fmt=document.getElementById('exportFormat').value||'image/png';
+  const quality=parseInt(document.getElementById('exportQuality').value)/100||.92;
+  html2canvas(canvas,{scale,useCORS:true,backgroundColor:canvas.style.background||'#ffffff'}).then(cvs=>{
+    const a=document.createElement('a');a.download='hwasongee-cover'+(fmt==='image/jpeg'?'.jpg':'.png');a.href=cvs.toDataURL(fmt,quality);a.click();
+    selectedId=prev;renderLayers();closeModal('exportModal');showToast(`📥 ${scale}× 고해상도 저장됨`);
+  });
+}
+
+// ── SAVE/LOAD ──
+function saveProject(){
+  const data={version:2,savedAt:new Date().toISOString(),canvasW:parseInt(canvas.style.width)||500,canvasH:parseInt(canvas.style.height)||700,bg:canvas.style.background||'#ffffff',layers:layers.map(l=>({...l}))};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.download='hwasongee-project.json';a.href=URL.createObjectURL(blob);a.click();showToast('💾 작업이 저장되었습니다');
+}
+function loadProject(){document.getElementById('projectFileInput').click();}
+function doLoadProject(e){
+  const file=e.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    try{
+      const data=JSON.parse(ev.target.result);if(!data.layers)throw new Error();
+      if(layers.length>0&&!confirm('현재 작업을 덮어쓸까요?'))return;
+      pushHistory();layers=data.layers.map(l=>({...l}));
+      layerCounter=layers.reduce((m,l)=>{const n=parseInt((l.id||'').split('_')[1])||0;return Math.max(m,n);},0);
+      canvas.style.width=(data.canvasW||500)+'px';canvas.style.height=(data.canvasH||700)+'px';canvas.style.background=data.bg||'#ffffff';
+      document.getElementById('canvasW').value=data.canvasW||500;document.getElementById('canvasH').value=data.canvasH||700;document.getElementById('bgColor').value=data.bg||'#ffffff';
+      selectedId=null;renderLayers();updateEmptyHint();setTimeout(fitZoom,50);document.getElementById('layerProps').style.display='none';showToast('📂 불러오기 완료!');
+    }catch{showToast('파일을 읽는 데 실패했습니다');}
+  };r.readAsText(file);e.target.value='';
+}
+
+// ── MOCKUP ──
+function openMockup(){
+  if(typeof html2canvas==='undefined'){showToast('잠시 후 다시 시도해주세요');return;}
+  const cw=parseInt(canvas.style.width)||500,ch=parseInt(canvas.style.height)||700;
+  const prev=selectedId;selectedId=null;renderLayers();showToast('목업 생성 중...');
+  html2canvas(canvas,{scale:2,useCORS:true,backgroundColor:canvas.style.background||'#ffffff'}).then(cap=>{
+    selectedId=prev;renderLayers();_mockupImgSrc=cap.toDataURL('image/png');
+    const maxH=370,ratio=cw/ch;_mockupH=Math.min(maxH,ch);_mockupW=Math.round(_mockupH*ratio);
+    renderMockup('#e8e4de');openModal('mockupModal');
+  }).catch(()=>{selectedId=prev;renderLayers();showToast('목업 생성 오류');});
+}
+function renderMockup(bg){
+  const c=document.getElementById('mockupContainer');if(!c||!_mockupImgSrc)return;
+  const isT=bg==='transparent';c.classList.toggle('transparent-bg',isT);c.style.background=isT?'':bg;
+  c.innerHTML=`<div style="padding:46px 56px;display:flex;align-items:center;justify-content:center"><div class="mockup-flatbook" style="width:${_mockupW}px;height:${_mockupH}px"><img src="${_mockupImgSrc}" alt="cover"></div></div>`;
+}
+function setMockupBg(color,el){document.querySelectorAll('.mockup-bg-swatch').forEach(s=>s.classList.remove('active'));if(el)el.classList.add('active');renderMockup(color);}
+function saveMockupPng(transparent){
+  if(!_mockupImgSrc){showToast('먼저 목업을 열어주세요');return;}
+  if(transparent){
+    const img=new Image();
+    img.onload=()=>{
+      const cvs=document.createElement('canvas');cvs.width=img.width;cvs.height=img.height;
+      const ctx=cvs.getContext('2d'),r=Math.round(img.width*.015);
+      ctx.beginPath();ctx.moveTo(r,0);ctx.lineTo(img.width-r,0);ctx.quadraticCurveTo(img.width,0,img.width,r);ctx.lineTo(img.width,img.height-r);ctx.quadraticCurveTo(img.width,img.height,img.width-r,img.height);ctx.lineTo(r,img.height);ctx.quadraticCurveTo(0,img.height,0,img.height-r);ctx.lineTo(0,r);ctx.quadraticCurveTo(0,0,r,0);ctx.closePath();ctx.clip();ctx.drawImage(img,0,0);
+      const g=ctx.createLinearGradient(0,0,Math.round(img.width*.04),0);g.addColorStop(0,'rgba(0,0,0,.3)');g.addColorStop(.5,'rgba(0,0,0,.12)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,Math.round(img.width*.04),img.height);
+      const gl=ctx.createLinearGradient(0,0,img.width,img.height);gl.addColorStop(0,'rgba(255,255,255,.18)');gl.addColorStop(.25,'rgba(255,255,255,.06)');gl.addColorStop(.55,'rgba(0,0,0,0)');gl.addColorStop(1,'rgba(0,0,0,.06)');ctx.fillStyle=gl;ctx.fillRect(0,0,img.width,img.height);
+      const a=document.createElement('a');a.download='mockup-transparent.png';a.href=cvs.toDataURL('image/png');a.click();showToast('✨ 투명배경 저장됨');
+    };img.src=_mockupImgSrc;
+  }else{
+    html2canvas(document.getElementById('mockupContainer'),{scale:2,useCORS:true,backgroundColor:null}).then(cvs=>{const a=document.createElement('a');a.download='mockup-cover.png';a.href=cvs.toDataURL('image/png');a.click();showToast('🖼 목업 저장됨');});
+  }
+}
+
+// ── SAMPLES ──
+let samplesOpen=true;
+function toggleSamples(){samplesOpen=!samplesOpen;document.getElementById('sampleGrid').classList.toggle('open',samplesOpen);document.getElementById('sampleToggle').classList.toggle('open',samplesOpen);}
+
+const SAMPLES = {
+  classic: {
+    bg: '#ffffff',
+    layers: [
+      { type:'shape', shapeType:'rect', name:'배경', x:0, y:0, width:500, height:700, color:'#ffffff', opacity:1 },
+      { type:'shape', shapeType:'rect', name:'상단 테두리', x:0, y:0, width:500, height:3, color:'#111111', opacity:1 },
+      { type:'text', name:'잡지 제목', text:'SAMPLE', font:"'Playfair Display', serif", size:108, color:'#111111', weight:'900', style:'normal', x:-4, y:-6, letterSpacing:-1, opacity:1 },
+      { type:'text', name:'지역', text:'KOREA', font:"'Montserrat', sans-serif", size:11, color:'#111111', weight:'700', style:'normal', x:22, y:18, letterSpacing:3, opacity:1 },
+      { type:'text', name:'날짜', text:'DEC\n2025', font:"'Montserrat', sans-serif", size:8, color:'#111111', weight:'400', style:'normal', x:8, y:58, letterSpacing:1, opacity:0.7 },
+      { type:'text', name:'세로 텍스트', text:'W\nI\nT\nH', font:"'Montserrat', sans-serif", size:9, color:'#111111', weight:'700', style:'normal', x:12, y:280, letterSpacing:2, opacity:0.85 },
+      { type:'text', name:'커버 레이블', text:'STUDIO', font:"'Montserrat', sans-serif", size:11, color:'#111111', weight:'400', style:'normal', x:28, y:594, letterSpacing:4, opacity:0.7 },
+      { type:'text', name:'인물 이름', text:'YOUR NAME', font:"'Montserrat', sans-serif", size:38, color:'#111111', weight:'900', style:'normal', x:28, y:608, letterSpacing:4, opacity:1 },
+      { type:'text', name:'인물 설명', text:'ON THE RISE OF A NEW CREATIVE ERA', font:"'Montserrat', sans-serif", size:9, color:'#111111', weight:'400', style:'normal', x:28, y:656, letterSpacing:2, opacity:0.75 },
+      { type:'shape', shapeType:'rect', name:'기사 구분선1', x:298, y:220, width:180, height:1, color:'#cccccc', opacity:1 },
+      { type:'shape', shapeType:'rect', name:'기사 구분선2', x:298, y:330, width:180, height:1, color:'#cccccc', opacity:1 },
+      { type:'shape', shapeType:'rect', name:'기사 구분선3', x:298, y:440, width:180, height:1, color:'#cccccc', opacity:1 },
+      { type:'text', name:'기사1 제목', text:'RISING\nSTAR', font:"'Montserrat', sans-serif", size:14, color:'#cc2222', weight:'900', style:'normal', x:300, y:228, letterSpacing:0, opacity:1 },
+      { type:'text', name:'기사1 서브1', text:'CREATIVE ICON', font:"'Montserrat', sans-serif", size:8, color:'#111111', weight:'700', style:'normal', x:300, y:262, letterSpacing:1, opacity:1 },
+      { type:'text', name:'기사1 서브2', text:'REDEFINING STYLE\nIN THE MODERN AGE', font:"'Montserrat', sans-serif", size:7, color:'#444444', weight:'400', style:'normal', x:300, y:274, letterSpacing:0, opacity:0.85 },
+      { type:'text', name:'기사2 따옴표', text:'‘SIGNATURE’', font:"'Playfair Display', serif", size:11, color:'#cc2222', weight:'700', style:'italic', x:300, y:338, letterSpacing:0, opacity:1 },
+      { type:'text', name:'기사2 제목', text:'THE ONE\n& ONLY', font:"'Montserrat', sans-serif", size:14, color:'#111111', weight:'900', style:'normal', x:300, y:354, letterSpacing:0, opacity:1 },
+      { type:'text', name:'기사2 서브', text:'A VISION OF BEAUTY\nBEYOND BOUNDARIES\nSPRING EDITION 2025', font:"'Montserrat', sans-serif", size:7, color:'#444444', weight:'400', style:'normal', x:300, y:386, letterSpacing:0, opacity:0.85 },
+      { type:'text', name:'기사3 제목', text:'BEST COVER', font:"'Montserrat', sans-serif", size:11, color:'#111111', weight:'900', style:'normal', x:300, y:448, letterSpacing:0, opacity:1 },
+      { type:'text', name:'기사3 서브', text:'MOST ICONIC\nLOOK OF 2025', font:"'Montserrat', sans-serif", size:8, color:'#444444', weight:'400', style:'normal', x:300, y:464, letterSpacing:0, opacity:0.85 },
+      { type:'shape', shapeType:'rect', name:'하단 구분선', x:0, y:594, width:500, height:2, color:'#111111', opacity:1 },
+    ]
+  },
+  noir: {
+    bg: '#080808',
+    layers: [
+      { type:'shape', shapeType:'rect', name:'배경', x:0, y:0, width:500, height:700, color:'#111111', opacity:1 },
+      { type:'shape', shapeType:'rect', name:'우측 세로선', x:248, y:80, width:1, height:220, color:'#ffffff', opacity:0.08 },
+      { type:'shape', shapeType:'rect', name:'상단 구분선', x:30, y:70, width:440, height:1, color:'#ffffff', opacity:0.12 },
+      { type:'shape', shapeType:'rect', name:'하단 구분선', x:30, y:630, width:440, height:1, color:'#ffffff', opacity:0.12 },
+      { type:'text', name:'잡지 제목', text:'NOIR', font:"'Playfair Display', serif", size:80, color:'#ffffff', weight:'900', style:'normal', x:26, y:8, letterSpacing:10, opacity:1 },
+      { type:'text', name:'서브 타이틀', text:'EDITORIAL', font:"'Montserrat', sans-serif", size:10, color:'#ffffff', weight:'300', style:'normal', x:30, y:92, letterSpacing:10, opacity:0.4 },
+      { type:'text', name:'에디션 정보', text:'WINTER 2025  ·  NEW ISSUE', font:"'Montserrat', sans-serif", size:8, color:'#ffffff', weight:'300', style:'normal', x:30, y:112, letterSpacing:4, opacity:0.25 },
+      { type:'text', name:'중앙 메인 카피', text:'THE ART OF\nSILENCE', font:"'Playfair Display', serif", size:36, color:'#ffffff', weight:'400', style:'italic', x:30, y:320, letterSpacing:1, opacity:0.1 },
+      { type:'text', name:'특집 제목', text:'DARK FANTASY SPECIAL', font:"'Montserrat', sans-serif", size:10, color:'#ffffff', weight:'700', style:'normal', x:30, y:640, letterSpacing:3, opacity:0.9 },
+      { type:'text', name:'특집 서브', text:'WINTER COLLECTION', font:"'Montserrat', sans-serif", size:8, color:'#ffffff', weight:'300', style:'normal', x:30, y:658, letterSpacing:4, opacity:0.4 },
+      { type:'text', name:'NEW / ISSUE 뱃지', text:'NEW\nISSUE', font:"'Montserrat', sans-serif", size:8, color:'#ffffff', weight:'700', style:'normal', x:450, y:20, letterSpacing:1, opacity:0.5 },
+    ]
+  },
+  nature: {
+    bg: '#0d1f12',
+    layers: [
+      { type:'shape', shapeType:'rect', name:'배경', x:0, y:0, width:500, height:700, color:'#1a3a20', opacity:1 },
+      { type:'shape', shapeType:'rect', name:'하단 어둠', x:0, y:500, width:500, height:200, color:'#0a1a0e', opacity:0.7 },
+      { type:'shape', shapeType:'rect', name:'상단 구분선', x:30, y:68, width:440, height:1, color:'#7ecb8a', opacity:0.3 },
+      { type:'text', name:'잡지 제목', text:'FLORA', font:"'Playfair Display', serif", size:68, color:'#7ecb8a', weight:'900', style:'normal', x:26, y:8, letterSpacing:6, opacity:1 },
+      { type:'text', name:'서브 타이틀', text:'· LIVING JOURNAL ·', font:"'Montserrat', sans-serif", size:9, color:'#7ecb8a', weight:'400', style:'normal', x:30, y:90, letterSpacing:6, opacity:0.8 },
+      { type:'text', name:'시즌 정보', text:'SPRING ISSUE  ·  2025', font:"'Montserrat', sans-serif", size:8, color:'#ffffff', weight:'300', style:'normal', x:30, y:108, letterSpacing:4, opacity:0.4 },
+      { type:'text', name:'메인 카피', text:'A Springtime\nFantasia', font:"'Cormorant Garamond', serif", size:32, color:'#ffffff', weight:'300', style:'italic', x:30, y:340, letterSpacing:0, opacity:0.55 },
+      { type:'text', name:'한국어 서브', text:'엘프들이 들려주는 봄날의 아름다운 환상곡', font:"'Montserrat', sans-serif", size:8, color:'#7ecb8a', weight:'300', style:'normal', x:30, y:410, letterSpacing:0, opacity:0.6 },
+      { type:'text', name:'특집 타이틀', text:'KNOW-HOW IN BEAUTY', font:"'Montserrat', sans-serif", size:10, color:'#7ecb8a', weight:'700', style:'normal', x:30, y:630, letterSpacing:2, opacity:1 },
+      { type:'text', name:'특집 서브', text:'NATURE CARE GUIDE', font:"'Montserrat', sans-serif", size:8, color:'#ffffff', weight:'300', style:'normal', x:30, y:648, letterSpacing:3, opacity:0.5 },
+    ]
+  },
+  modern: {
+    bg: '#0a0a0a',
+    layers: [
+      { type:'shape', shapeType:'rect', name:'배경', x:0, y:0, width:500, height:700, color:'#141414', opacity:1 },
+      { type:'shape', shapeType:'rect', name:'상단 골드선', x:0, y:70, width:500, height:1, color:'#c9a96e', opacity:0.4 },
+      { type:'shape', shapeType:'rect', name:'상단 얇은선', x:0, y:73, width:500, height:1, color:'#c9a96e', opacity:0.1 },
+      { type:'shape', shapeType:'rect', name:'하단 구분선', x:30, y:635, width:440, height:1, color:'#c9a96e', opacity:0.2 },
+      { type:'text', name:'잡지 이니셜', text:'M', font:"'Playfair Display', serif", size:58, color:'#c9a96e', weight:'900', style:'normal', x:26, y:10, letterSpacing:0, opacity:1 },
+      { type:'text', name:'잡지명', text:'MAGAZINE', font:"'Montserrat', sans-serif", size:10, color:'#ffffff', weight:'300', style:'normal', x:30, y:87, letterSpacing:12, opacity:0.3 },
+      { type:'text', name:'볼륨 날짜', text:'03 · 2025', font:"'Montserrat', sans-serif", size:9, color:'#ffffff', weight:'300', style:'normal', x:420, y:15, letterSpacing:2, opacity:0.35 },
+      { type:'text', name:'워터마크 타이포', text:'MAGAZINE\nSTUDIO', font:"'Playfair Display', serif", size:52, color:'#ffffff', weight:'900', style:'normal', x:30, y:280, letterSpacing:2, opacity:0.04 },
+      { type:'text', name:'세로 영문', text:'EDITORIAL · SPECIAL ISSUE', font:"'Montserrat', sans-serif", size:7, color:'#ffffff', weight:'300', style:'normal', x:476, y:200, letterSpacing:3, opacity:0.12 },
+      { type:'text', name:'ON THE COVER', text:'— ON THE COVER', font:"'Montserrat', sans-serif", size:8, color:'#c9a96e', weight:'700', style:'normal', x:30, y:640, letterSpacing:3, opacity:0.9 },
+      { type:'text', name:'커버 이름', text:'Your Name Here', font:"'Playfair Display', serif", size:18, color:'#ffffff', weight:'400', style:'italic', x:30, y:657, letterSpacing:0, opacity:0.4 },
+      { type:'text', name:'하단 카테고리', text:'BEAUTY · FASHION · ART', font:"'Montserrat', sans-serif", size:7, color:'#ffffff', weight:'300', style:'normal', x:30, y:685, letterSpacing:4, opacity:0.2 },
+    ]
+  },
+  editorial: {
+    bg: '#f5f0e8',
+    layers: [
+      { type:'shape', shapeType:'rect', name:'배경', x:0, y:0, width:500, height:700, color:'#f5f0e8', opacity:1 },
+      { type:'shape', shapeType:'rect', name:'상단 구분선', x:30, y:70, width:440, height:1, color:'#2a1a0a', opacity:0.12 },
+      { type:'shape', shapeType:'rect', name:'하단 구분선', x:30, y:630, width:440, height:1, color:'#2a1a0a', opacity:0.12 },
+      { type:'shape', shapeType:'circle', name:'장식 원', x:175, y:220, width:150, height:150, color:'#2a1a0a', opacity:0.06 },
+      { type:'text', name:'잡지 제목', text:'LUMIÈRE', font:"'Playfair Display', serif", size:54, color:'#2a1a0a', weight:'900', style:'normal', x:26, y:10, letterSpacing:4, opacity:1 },
+      { type:'text', name:'서브 타이틀', text:'PARIS · EDITION', font:"'Montserrat', sans-serif", size:9, color:'#2a1a0a', weight:'300', style:'normal', x:30, y:84, letterSpacing:8, opacity:0.45 },
+      { type:'text', name:'중앙 이탤릭', text:'à la mode', font:"'Cormorant Garamond', serif", size:22, color:'#2a1a0a', weight:'300', style:'italic', x:165, y:282, letterSpacing:0, opacity:0.12 },
+      { type:'text', name:'호 번호', text:'No. 12', font:"'Cormorant Garamond', serif", size:11, color:'#2a1a0a', weight:'400', style:'italic', x:440, y:22, letterSpacing:0, opacity:0.35 },
+      { type:'text', name:'시즌 정보', text:'SAISON PRINTEMPS', font:"'Montserrat', sans-serif", size:9, color:'#8b6914', weight:'700', style:'normal', x:30, y:640, letterSpacing:4, opacity:0.9 },
+      { type:'text', name:'에디토리얼 서브', text:'THE BEAUTY INSIDE', font:"'Cormorant Garamond', serif", size:14, color:'#2a1a0a', weight:'300', style:'italic', x:30, y:658, letterSpacing:1, opacity:0.45 },
+    ]
+  },
+  pastel: {
+    bg: '#f8e8f0',
+    layers: [
+      { type:'shape', shapeType:'rect', name:'배경', x:0, y:0, width:500, height:700, color:'#f0e0f0', opacity:1 },
+      { type:'shape', shapeType:'rect', name:'배경 그라디언트 레이어', x:0, y:0, width:500, height:700, color:'#e8d8f0', opacity:0.5 },
+      { type:'shape', shapeType:'rect', name:'상단 라인', x:30, y:70, width:440, height:1, color:'#8a5fa0', opacity:0.2 },
+      { type:'shape', shapeType:'rect', name:'하단 라인', x:30, y:630, width:440, height:1, color:'#8a5fa0', opacity:0.2 },
+      { type:'text', name:'잡지 제목', text:'RÊVE', font:"'Playfair Display', serif", size:68, color:'#8a5fa0', weight:'900', style:'normal', x:26, y:8, letterSpacing:6, opacity:1 },
+      { type:'text', name:'서브 타이틀', text:'· DOUX MAGAZINE ·', font:"'Montserrat', sans-serif", size:9, color:'#8a5fa0', weight:'400', style:'normal', x:30, y:92, letterSpacing:6, opacity:0.6 },
+      { type:'text', name:'별 장식 1', text:'✦', font:"'Montserrat', sans-serif", size:60, color:'#8a5fa0', weight:'400', style:'normal', x:210, y:240, letterSpacing:0, opacity:0.08 },
+      { type:'text', name:'별 장식 2', text:'✦', font:"'Montserrat', sans-serif", size:14, color:'#c07898', weight:'400', style:'normal', x:340, y:370, letterSpacing:0, opacity:0.15 },
+      { type:'text', name:'꽃 장식', text:'✿  DREAM ISSUE  ✿', font:"'Montserrat', sans-serif", size:9, color:'#c07898', weight:'600', style:'normal', x:30, y:640, letterSpacing:3, opacity:1 },
+      { type:'text', name:'하단 서브', text:'SOFT · SWEET · SUBLIME', font:"'Montserrat', sans-serif", size:8, color:'#8a5fa0', weight:'300', style:'normal', x:30, y:660, letterSpacing:4, opacity:0.6 },
+      { type:'text', name:'이탤릭 카피', text:'A Dream in\nBloom', font:"'Cormorant Garamond', serif", size:30, color:'#8a5fa0', weight:'300', style:'italic', x:30, y:350, letterSpacing:0, opacity:0.18 },
+    ]
+  }
+};
+
+function loadSample(key){
+  const s=SAMPLES[key];if(!s)return;
+  // confirm 제거 — 샘플 클릭 시 바로 적용
+  pushHistory();layers=[];selectedId=null;layerCounter=0;
+  canvas.style.background=s.bg;document.getElementById('bgColor').value=s.bg;
+  canvas.style.width='500px';canvas.style.height='700px';document.getElementById('canvasW').value=500;document.getElementById('canvasH').value=700;
+  s.layers.forEach(def=>{const id='layer_'+(++layerCounter);layers.push({id,visible:true,locked:false,...def});});
+  renderLayers();updateEmptyHint();setTimeout(()=>{fitZoom();initBgPicker();},30);document.getElementById('layerProps').style.display='none';
+  const nm={classic:'샘플 레이아웃',noir:'다크 에디토리얼',nature:'네이처 그린',modern:'모던 미니멀',editorial:'라이트 에디토리얼',pastel:'파스텔 드림'};
+  showToast(`✦ "${nm[key]}" 샘플 적용됨`);
+}
+
+// ══════════════════════════════════════════
+// GRADIENT PICKER
+// ══════════════════════════════════════════
+// initGradPicker(containerId, currentValue, onChangeCallback)
+// currentValue: '#hex' 또는 'linear-gradient(...)' 문자열
+function initGradPicker(containerId, currentValue, onChange){
+  const wrap=document.getElementById(containerId);
+  if(!wrap)return;
+  wrap.innerHTML='';
+
+  // 현재 값 파싱
+  const isGrad = currentValue && currentValue.includes('gradient');
+  let mode = isGrad ? 'grad' : 'solid';
+
+  // 그라디언트 파싱
+  function parseGrad(v){
+    // linear-gradient(Xdeg, #aaa, #bbb) 또는 간단한 형태
+    const m=v.match(/linear-gradient\(\s*(\d+)deg\s*,\s*(#[\w]+|rgba?\([^)]+\))\s*,\s*(#[\w]+|rgba?\([^)]+\))\s*\)/);
+    if(m)return{angle:parseInt(m[1]),c1:m[2],c2:m[3]};
+    return{angle:135,c1:'#b07d3a',c2:'#e8c87a'};
+  }
+
+  let solidColor = isGrad ? '#b07d3a' : (currentValue||'#b07d3a');
+  let gradData = isGrad ? parseGrad(currentValue) : {angle:135,c1:solidColor,c2:'#ffffff'};
+
+  function buildGradStr(){
+    return `linear-gradient(${gradData.angle}deg, ${gradData.c1}, ${gradData.c2})`;
+  }
+  function emit(){
+    onChange(mode==='solid' ? solidColor : buildGradStr());
+  }
+
+  function render(){
+    wrap.innerHTML='';
+
+    // 모드 탭
+    const tabs=document.createElement('div');
+    tabs.className='grad-mode-tabs';
+    ['단색','그라디언트'].forEach((label,i)=>{
+      const isMode = (i===0&&mode==='solid')||(i===1&&mode==='grad');
+      const btn=document.createElement('button');
+      btn.className='grad-mode-tab'+(isMode?' active':'');
+      btn.textContent=label;
+      btn.onclick=()=>{ mode=i===0?'solid':'grad'; emit(); render(); };
+      tabs.appendChild(btn);
+    });
+    wrap.appendChild(tabs);
+
+    if(mode==='solid'){
+      // 단색 피커
+      const row=document.createElement('div');
+      row.className='grad-row';
+      const inp=document.createElement('input');
+      inp.type='color'; inp.value=solidColor;
+      inp.style.cssText='width:36px;height:28px;border-radius:5px;border:1px solid var(--border);cursor:pointer;padding:1px 2px;flex-shrink:0';
+      inp.oninput=e=>{solidColor=e.target.value;emit();};
+      // 미리보기
+      const prev=document.createElement('div');
+      prev.style.cssText=`flex:1;height:28px;border-radius:5px;border:1px solid var(--border);background:${solidColor}`;
+      row.appendChild(inp); row.appendChild(prev);
+      wrap.appendChild(row);
+
+    } else {
+      // 그라디언트 피커
+      // 프리뷰 바
+      const prev=document.createElement('div');
+      prev.className='grad-preview';
+      prev.style.background=buildGradStr();
+      wrap.appendChild(prev);
+
+      // 색상 1 + 색상 2
+      const colors=document.createElement('div');
+      colors.style.cssText='display:flex;gap:5px;align-items:center;margin-bottom:3px';
+
+      const lbl1=document.createElement('span');
+      lbl1.textContent='시작';lbl1.style.cssText='font-size:9px;color:var(--text-dim);flex-shrink:0';
+      const c1=document.createElement('input');
+      c1.type='color'; c1.value=gradData.c1;
+      c1.style.cssText='width:30px;height:24px;border-radius:4px;border:1px solid var(--border);cursor:pointer;padding:1px 2px;flex-shrink:0';
+      c1.oninput=e=>{gradData.c1=e.target.value;prev.style.background=buildGradStr();emit();};
+
+      const arrow=document.createElement('span');
+      arrow.textContent='→';arrow.style.cssText='color:var(--text-dim);font-size:11px;flex:1;text-align:center';
+
+      const lbl2=document.createElement('span');
+      lbl2.textContent='끝';lbl2.style.cssText='font-size:9px;color:var(--text-dim);flex-shrink:0';
+      const c2=document.createElement('input');
+      c2.type='color'; c2.value=gradData.c2;
+      c2.style.cssText='width:30px;height:24px;border-radius:4px;border:1px solid var(--border);cursor:pointer;padding:1px 2px;flex-shrink:0';
+      c2.oninput=e=>{gradData.c2=e.target.value;prev.style.background=buildGradStr();emit();};
+
+      colors.appendChild(lbl1);colors.appendChild(c1);colors.appendChild(arrow);colors.appendChild(lbl2);colors.appendChild(c2);
+      wrap.appendChild(colors);
+
+      // 각도 슬라이더
+      const angleRow=document.createElement('div');
+      angleRow.style.cssText='display:flex;align-items:center;gap:5px';
+      const angleLbl=document.createElement('span');
+      angleLbl.textContent='각도';angleLbl.style.cssText='font-size:9px;color:var(--text-dim);flex-shrink:0;width:26px';
+      const angleSlider=document.createElement('input');
+      angleSlider.type='range';angleSlider.min=0;angleSlider.max=360;angleSlider.value=gradData.angle;
+      angleSlider.style.cssText='flex:1;accent-color:var(--accent)';
+      const angleVal=document.createElement('span');
+      angleVal.textContent=gradData.angle+'°';
+      angleVal.style.cssText='font-size:9px;color:var(--text-dim);width:28px;text-align:right;flex-shrink:0';
+      angleSlider.oninput=e=>{gradData.angle=+e.target.value;angleVal.textContent=gradData.angle+'°';prev.style.background=buildGradStr();emit();};
+      angleRow.appendChild(angleLbl);angleRow.appendChild(angleSlider);angleRow.appendChild(angleVal);
+      wrap.appendChild(angleRow);
+
+      // 빠른 프리셋
+      const presets=[
+        {label:'↓',a:180,c1:'#b07d3a',c2:'#e8c87a'},
+        {label:'↘',a:135,c1:'#2d1555',c2:'#c9a96e'},
+        {label:'→',a:90, c1:'#0d1f12',c2:'#7ecb8a'},
+        {label:'↗',a:45, c1:'#111',   c2:'#555'},
+        {label:'↑',a:0,  c1:'#e8d8f0',c2:'#8a5fa0'},
+        {label:'◐',a:270,c1:'#f5f0e8',c2:'#c9a96e'},
+      ];
+      const prow=document.createElement('div');
+      prow.style.cssText='display:flex;gap:3px;margin-top:3px;flex-wrap:wrap';
+      presets.forEach(p=>{
+        const pb=document.createElement('div');
+        pb.style.cssText=`width:22px;height:22px;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:linear-gradient(${p.a}deg,${p.c1},${p.c2});transition:transform .1s`;
+        pb.title=p.label+' '+p.a+'°';
+        pb.onmouseenter=()=>pb.style.transform='scale(1.15)';
+        pb.onmouseleave=()=>pb.style.transform='';
+        pb.onclick=()=>{gradData={angle:p.a,c1:p.c1,c2:p.c2};emit();render();};
+        prow.appendChild(pb);
+      });
+      wrap.appendChild(prow);
+    }
+  }
+
+  render();
+}
+
+// 캔버스 배경 피커 초기화 (DOMContentLoaded 후)
+function initBgPicker(){
+  initGradPicker('bgGradPicker', canvas.style.background||'#ffffff', val=>setBgColor(val));
+}
+
+// ══════════════════════════════════════════
+// STICKER LIBRARY
+// ══════════════════════════════════════════
+const STICKERS = {
+  star:[
+    {name:'별4',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 5 L61 35 L95 35 L68 57 L79 91 L50 70 L21 91 L32 57 L5 35 L39 35Z" fill="currentColor"/></svg>`},
+    {name:'별6',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polygon points="50,5 61,40 95,40 68,60 78,95 50,75 22,95 32,60 5,40 39,40" fill="none" stroke="currentColor" stroke-width="5"/></svg>`},
+    {name:'빛살',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="5" x2="50" y2="95" stroke="currentColor" stroke-width="4"/><line x1="5" y1="50" x2="95" y2="50" stroke="currentColor" stroke-width="4"/><line x1="18" y1="18" x2="82" y2="82" stroke="currentColor" stroke-width="3"/><line x1="82" y1="18" x2="18" y2="82" stroke="currentColor" stroke-width="3"/></svg>`},
+    {name:'✦',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 2 C50 2 55 45 98 50 C55 55 50 98 50 98 C50 98 45 55 2 50 C45 45 50 2 50 2Z" fill="currentColor"/></svg>`},
+    {name:'✧',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 2 C50 2 55 45 98 50 C55 55 50 98 50 98 C50 98 45 55 2 50 C45 45 50 2 50 2Z" fill="none" stroke="currentColor" stroke-width="4"/></svg>`},
+    {name:'빛점',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="8" fill="currentColor"/><line x1="50" y1="5" x2="50" y2="30" stroke="currentColor" stroke-width="3"/><line x1="50" y1="70" x2="50" y2="95" stroke="currentColor" stroke-width="3"/><line x1="5" y1="50" x2="30" y2="50" stroke="currentColor" stroke-width="3"/><line x1="70" y1="50" x2="95" y2="50" stroke="currentColor" stroke-width="3"/><line x1="18" y1="18" x2="35" y2="35" stroke="currentColor" stroke-width="2.5"/><line x1="65" y1="65" x2="82" y2="82" stroke="currentColor" stroke-width="2.5"/><line x1="82" y1="18" x2="65" y2="35" stroke="currentColor" stroke-width="2.5"/><line x1="35" y1="65" x2="18" y2="82" stroke="currentColor" stroke-width="2.5"/></svg>`},
+    {name:'반짝',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 10 L53 47 L90 50 L53 53 L50 90 L47 53 L10 50 L47 47Z" fill="currentColor"/></svg>`},
+    {name:'크로스',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="42" y="10" width="16" height="80" rx="8" fill="currentColor"/><rect x="10" y="42" width="80" height="16" rx="8" fill="currentColor"/></svg>`},
+  ],
+  flower:[
+    {name:'꽃1',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse cx="50" cy="22" rx="12" ry="18" fill="currentColor" opacity=".9"/><ellipse cx="50" cy="22" rx="12" ry="18" fill="currentColor" opacity=".9" transform="rotate(60 50 50)"/><ellipse cx="50" cy="22" rx="12" ry="18" fill="currentColor" opacity=".9" transform="rotate(120 50 50)"/><ellipse cx="50" cy="22" rx="12" ry="18" fill="currentColor" opacity=".9" transform="rotate(180 50 50)"/><ellipse cx="50" cy="22" rx="12" ry="18" fill="currentColor" opacity=".9" transform="rotate(240 50 50)"/><ellipse cx="50" cy="22" rx="12" ry="18" fill="currentColor" opacity=".9" transform="rotate(300 50 50)"/><circle cx="50" cy="50" r="14" fill="#fff"/></svg>`},
+    {name:'꽃2',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 10 Q65 30 50 50 Q35 30 50 10Z" fill="currentColor"/><path d="M50 10 Q65 30 50 50 Q35 30 50 10Z" fill="currentColor" transform="rotate(72 50 50)"/><path d="M50 10 Q65 30 50 50 Q35 30 50 10Z" fill="currentColor" transform="rotate(144 50 50)"/><path d="M50 10 Q65 30 50 50 Q35 30 50 10Z" fill="currentColor" transform="rotate(216 50 50)"/><path d="M50 10 Q65 30 50 50 Q35 30 50 10Z" fill="currentColor" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="10" fill="#fff"/></svg>`},
+    {name:'잎',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 5 Q90 50 50 95 Q10 50 50 5Z" fill="currentColor"/><line x1="50" y1="5" x2="50" y2="95" stroke="#fff" stroke-width="2" opacity=".5"/></svg>`},
+    {name:'꽃3',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="18" r="14" fill="currentColor"/><circle cx="50" cy="18" r="14" fill="currentColor" transform="rotate(45 50 50)"/><circle cx="50" cy="18" r="14" fill="currentColor" transform="rotate(90 50 50)"/><circle cx="50" cy="18" r="14" fill="currentColor" transform="rotate(135 50 50)"/><circle cx="50" cy="50" r="18" fill="#fff"/></svg>`},
+    {name:'해바라기',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse cx="50" cy="15" rx="8" ry="14" fill="currentColor"/><ellipse cx="50" cy="15" rx="8" ry="14" fill="currentColor" transform="rotate(30 50 50)"/><ellipse cx="50" cy="15" rx="8" ry="14" fill="currentColor" transform="rotate(60 50 50)"/><ellipse cx="50" cy="15" rx="8" ry="14" fill="currentColor" transform="rotate(90 50 50)"/><ellipse cx="50" cy="15" rx="8" ry="14" fill="currentColor" transform="rotate(120 50 50)"/><ellipse cx="50" cy="15" rx="8" ry="14" fill="currentColor" transform="rotate(150 50 50)"/><ellipse cx="50" cy="15" rx="8" ry="14" fill="currentColor" transform="rotate(180 50 50)"/><ellipse cx="50" cy="15" rx="8" ry="14" fill="currentColor" transform="rotate(210 50 50)"/><ellipse cx="50" cy="15" rx="8" ry="14" fill="currentColor" transform="rotate(240 50 50)"/><ellipse cx="50" cy="15" rx="8" ry="14" fill="currentColor" transform="rotate(270 50 50)"/><ellipse cx="50" cy="15" rx="8" ry="14" fill="currentColor" transform="rotate(300 50 50)"/><ellipse cx="50" cy="15" rx="8" ry="14" fill="currentColor" transform="rotate(330 50 50)"/><circle cx="50" cy="50" r="20" fill="#5a3a00"/></svg>`},
+    {name:'나뭇잎',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 90 Q10 60 20 20 Q50 5 80 20 Q90 60 50 90Z" fill="currentColor"/><path d="M50 90 Q48 50 50 10" stroke="#fff" stroke-width="2" fill="none" opacity=".5"/></svg>`},
+    {name:'민들레',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="10" fill="currentColor"/><line x1="50" y1="5" x2="50" y2="40" stroke="currentColor" stroke-width="2"/><line x1="50" y1="60" x2="50" y2="95" stroke="currentColor" stroke-width="2"/><line x1="5" y1="50" x2="40" y2="50" stroke="currentColor" stroke-width="2"/><line x1="60" y1="50" x2="95" y2="50" stroke="currentColor" stroke-width="2"/><line x1="15" y1="15" x2="40" y2="40" stroke="currentColor" stroke-width="2"/><line x1="60" y1="60" x2="85" y2="85" stroke="currentColor" stroke-width="2"/><line x1="85" y1="15" x2="60" y2="40" stroke="currentColor" stroke-width="2"/><line x1="40" y1="60" x2="15" y2="85" stroke="currentColor" stroke-width="2"/></svg>`},
+    {name:'클로버',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="30" r="22" fill="currentColor"/><circle cx="30" cy="58" r="22" fill="currentColor"/><circle cx="70" cy="58" r="22" fill="currentColor"/><rect x="46" y="65" width="8" height="30" rx="4" fill="currentColor"/></svg>`},
+  ],
+  arrow:[
+    {name:'→',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="50" x2="80" y2="50" stroke="currentColor" stroke-width="8" stroke-linecap="round"/><polyline points="60,25 85,50 60,75" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+    {name:'↗',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="80" x2="78" y2="22" stroke="currentColor" stroke-width="8" stroke-linecap="round"/><polyline points="45,18 82,18 82,55" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+    {name:'↓',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><line x1="50" y1="10" x2="50" y2="80" stroke="currentColor" stroke-width="8" stroke-linecap="round"/><polyline points="25,60 50,85 75,60" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+    {name:'⟵',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><line x1="90" y1="50" x2="20" y2="50" stroke="currentColor" stroke-width="8" stroke-linecap="round"/><polyline points="40,25 15,50 40,75" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+    {name:'↩',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M80 25 Q80 60 40 60 L20 60" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/><polyline points="35,40 18,60 35,80" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+    {name:'⇄',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="38" x2="80" y2="38" stroke="currentColor" stroke-width="6"/><polyline points="65,22 82,38 65,54" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><line x1="90" y1="62" x2="20" y2="62" stroke="currentColor" stroke-width="6"/><polyline points="35,46 18,62 35,78" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+    {name:'↻',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M85 50 A35 35 0 1 1 64 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/><polyline points="55,8 68,20 56,32" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+    {name:'↙',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><line x1="80" y1="20" x2="22" y2="78" stroke="currentColor" stroke-width="8" stroke-linecap="round"/><polyline points="55,82 18,82 18,45" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+  ],
+  geo:[
+    {name:'삼각형',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polygon points="50,8 95,92 5,92" fill="currentColor"/></svg>`},
+    {name:'삼각형빈',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polygon points="50,8 95,92 5,92" fill="none" stroke="currentColor" stroke-width="5"/></svg>`},
+    {name:'마름모',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polygon points="50,5 95,50 50,95 5,50" fill="currentColor"/></svg>`},
+    {name:'마름모빈',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polygon points="50,5 95,50 50,95 5,50" fill="none" stroke="currentColor" stroke-width="5"/></svg>`},
+    {name:'육각형',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polygon points="50,5 90,27 90,73 50,95 10,73 10,27" fill="currentColor"/></svg>`},
+    {name:'육각형빈',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polygon points="50,5 90,27 90,73 50,95 10,73 10,27" fill="none" stroke="currentColor" stroke-width="5"/></svg>`},
+    {name:'오각형',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polygon points="50,5 97,40 78,95 22,95 3,40" fill="currentColor"/></svg>`},
+    {name:'원빈',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="5"/></svg>`},
+    {name:'십자',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="38" y="5" width="24" height="90" rx="4" fill="currentColor"/><rect x="5" y="38" width="90" height="24" rx="4" fill="currentColor"/></svg>`},
+    {name:'X',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="10" x2="90" y2="90" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><line x1="90" y1="10" x2="10" y2="90" stroke="currentColor" stroke-width="12" stroke-linecap="round"/></svg>`},
+  ],
+  deco:[
+    {name:'하트',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 85 L15 50 A25 25 0 0 1 50 25 A25 25 0 0 1 85 50Z" fill="currentColor"/></svg>`},
+    {name:'하트빈',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 85 L15 50 A25 25 0 0 1 50 25 A25 25 0 0 1 85 50Z" fill="none" stroke="currentColor" stroke-width="5"/></svg>`},
+    {name:'왕관',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polygon points="10,80 10,40 30,60 50,20 70,60 90,40 90,80" fill="currentColor"/><rect x="10" y="78" width="80" height="10" rx="3" fill="currentColor"/></svg>`},
+    {name:'리본',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 50 L10 20 L10 45 L50 50 L90 20 L90 45Z" fill="currentColor"/><path d="M50 50 L10 80 L10 55 L50 50 L90 80 L90 55Z" fill="currentColor"/><circle cx="50" cy="50" r="8" fill="currentColor"/></svg>`},
+    {name:'나비',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse cx="28" cy="35" rx="24" ry="16" fill="currentColor" opacity=".9" transform="rotate(-20 28 35)"/><ellipse cx="72" cy="35" rx="24" ry="16" fill="currentColor" opacity=".9" transform="rotate(20 72 35)"/><ellipse cx="28" cy="65" rx="18" ry="12" fill="currentColor" opacity=".7" transform="rotate(20 28 65)"/><ellipse cx="72" cy="65" rx="18" ry="12" fill="currentColor" opacity=".7" transform="rotate(-20 72 65)"/><ellipse cx="50" cy="50" rx="4" ry="20" fill="#333" opacity=".6"/></svg>`},
+    {name:'달',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M60 15 A38 38 0 1 0 60 85 A28 28 0 1 1 60 15Z" fill="currentColor"/></svg>`},
+    {name:'번개',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polygon points="58,5 25,55 48,55 42,95 75,45 52,45" fill="currentColor"/></svg>`},
+    {name:'체크',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><polyline points="10,52 38,80 90,20" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+    {name:'물방울',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 5 Q80 40 80 65 A30 30 0 0 1 20 65 Q20 40 50 5Z" fill="currentColor"/></svg>`},
+    {name:'무한대',svg:`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30 50 Q30 25 50 25 Q70 25 70 50 Q70 75 50 75 Q30 75 30 50 Q30 25 50 25" fill="none" stroke="currentColor" stroke-width="8"/><path d="M70 50 Q70 25 90 25 A20 20 0 0 1 90 75 Q70 75 70 50" fill="none" stroke="currentColor" stroke-width="8"/><path d="M30 50 Q30 75 10 75 A20 20 0 0 1 10 25 Q30 25 30 50" fill="none" stroke="currentColor" stroke-width="8"/></svg>`},
+  ]
+};
+
+let _stickerCat='star';
+function initStickerGrid(cat){
+  _stickerCat=cat||_stickerCat;
+  const grid=document.getElementById('stickerGrid');
+  if(!grid)return;
+  grid.innerHTML='';
+  (STICKERS[_stickerCat]||[]).forEach(s=>{
+    const div=document.createElement('div');
+    div.className='sticker-item';
+    div.title=s.name;
+    div.innerHTML=s.svg.replace(/currentColor/g,'#b07d3a');
+    div.onclick=()=>addStickerLayer(s);
+    grid.appendChild(div);
+  });
+}
+function showStickerCat(cat,btn){
+  document.querySelectorAll('.sticker-cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  initStickerGrid(cat);
+}
+function addStickerLayer(sticker){
+  const color=document.getElementById('stickerColor')?.value||'#b07d3a';
+  const size=parseInt(document.getElementById('stickerSize')?.value)||80;
+  const id='layer_'+(++layerCounter);
+  const cw=parseInt(canvas.style.width)||500, ch=parseInt(canvas.style.height)||700;
+  pushHistory();
+  layers.push({
+    id, type:'sticker', name:sticker.name,
+    svgData:sticker.svg, color,
+    x:(cw-size)/2, y:(ch-size)/2,
+    width:size, height:size,
+    opacity:1, visible:true, locked:false
+  });
+  renderLayers();selectLayer(id);updateEmptyHint();
+  closeModal('newLayerModal');
+  showToast('✦ 스티커 추가됨');
+}
+
+// ══════════════════════════════════════════
+// CLIP MASK
+// ══════════════════════════════════════════
+let _clipSrc=null, _clipShape='circle';
+function handleClipImageUpload(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    _clipSrc=ev.target.result;
+    document.getElementById('clipFileName').textContent=f.name.substring(0,20);
+  };
+  r.readAsDataURL(f);
+}
+function selectClipShape(shape,btn){
+  _clipShape=shape;
+  document.querySelectorAll('.clip-shape-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function addClipLayer(){
+  if(!_clipSrc){showToast('이미지를 먼저 업로드해주세요');return;}
+  const size=parseInt(document.getElementById('clipSize')?.value)||200;
+  const id='layer_'+(++layerCounter);
+  const cw=parseInt(canvas.style.width)||500, ch=parseInt(canvas.style.height)||700;
+  pushHistory();
+  layers.push({
+    id, type:'clip', name:_clipShape+' 마스크',
+    src:_clipSrc, clipShape:_clipShape,
+    x:(cw-size)/2, y:(ch-size)/2,
+    width:size, height:size,
+    opacity:1, visible:true, locked:false
+  });
+  renderLayers();selectLayer(id);updateEmptyHint();
+  closeModal('newLayerModal');
+  _clipSrc=null;
+  showToast('⬡ 클리핑 마스크 추가됨');
+}
+function buildClipPathEl(shape, W, H, svgNS){
+  const el=document.createElementNS(svgNS, shape==='circle'||shape==='ellipse'?'ellipse':'polygon'||'rect');
+  if(shape==='rect'){
+    const r=document.createElementNS(svgNS,'rect');
+    r.setAttribute('x','0');r.setAttribute('y','0');r.setAttribute('width',W);r.setAttribute('height',H);
+    return r;
+  }
+  if(shape==='circle'||shape==='ellipse'){
+    const e=document.createElementNS(svgNS,'ellipse');
+    e.setAttribute('cx',W/2);e.setAttribute('cy',H/2);
+    e.setAttribute('rx',shape==='ellipse'?W/2:Math.min(W,H)/2);
+    e.setAttribute('ry',Math.min(W,H)/2);
+    return e;
+  }
+  if(shape==='rounded'){
+    const r=document.createElementNS(svgNS,'rect');
+    r.setAttribute('x','0');r.setAttribute('y','0');r.setAttribute('width',W);r.setAttribute('height',H);
+    r.setAttribute('rx',Math.min(W,H)*0.15);r.setAttribute('ry',Math.min(W,H)*0.15);
+    return r;
+  }
+  const poly=document.createElementNS(svgNS,'polygon');
+  let pts='';
+  if(shape==='diamond') pts=`${W/2},0 ${W},${H/2} ${W/2},${H} 0,${H/2}`;
+  else if(shape==='triangle') pts=`${W/2},0 ${W},${H} 0,${H}`;
+  else if(shape==='hexagon'){
+    const pts6=[];for(let i=0;i<6;i++){const a=(i*60-30)*Math.PI/180;pts6.push(`${W/2+W/2*Math.cos(a)},${H/2+H/2*Math.sin(a)}`);}
+    pts=pts6.join(' ');
+  }
+  else if(shape==='star5'){
+    const pts5=[];
+    for(let i=0;i<10;i++){
+      const a=(i*36-90)*Math.PI/180;
+      const r2=i%2===0?Math.min(W,H)/2:Math.min(W,H)/4;
+      pts5.push(`${W/2+r2*Math.cos(a)},${H/2+r2*Math.sin(a)}`);
+    }
+    pts=pts5.join(' ');
+  }
+  poly.setAttribute('points',pts);
+  return poly;
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('sampleGrid').classList.add('open');document.getElementById('sampleToggle').classList.add('open');
+  canvas.style.width='500px';canvas.style.height='700px';canvas.style.background='#ffffff';
+  pushHistory();setTimeout(()=>{fitZoom();initBgPicker();},80);
+});
+const _sc=document.createElement('script');_sc.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';document.head.appendChild(_sc);
+</script>
+</body>
+</html>
